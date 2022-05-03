@@ -1,0 +1,26 @@
+# depslib dependency file v1.0
+1651428301 source:d:\projetos\c\estacionamento\main.c
+	<stdio.h>
+	<stdlib.h>
+	"fileira.h"
+
+1651437633 source:d:\projetos\c\estacionamento\rua.c
+	"rua.h"
+
+1651508641 source:d:\projetos\c\estacionamento\fileira.c
+	"fileira.h"
+
+1651437084 d:\projetos\c\estacionamento\fileira.h
+	"carro.h"
+
+1651610111 d:\projetos\c\estacionamento\carro.h
+	"stdio.h"
+	"string.h"
+	<stdlib.h>
+
+1651437422 d:\projetos\c\estacionamento\rua.h
+	"carro.h"
+
+1651557091 source:d:\projetos\c\estacionamento\carro.c
+	"carro.h"
+
