@@ -21,11 +21,20 @@ Rua* cria_fila(int tam){
 
     Rua *fila = (Rua*)malloc(sizeof(Rua));
 
+
+    if(fila == NULL){
+
+        return NULL;
+
+    }
+
     fila->inicio = NULL;
     fila->fim = NULL;
 
     fila->n = 0;
     fila->tam = tam;
+
+    return fila;
 
 }
 

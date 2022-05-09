@@ -24,3 +24,16 @@ Carro* criar_carro(char placa[TAM_PLACA], int previsaoRetirada){
 
     return newCarro;
 }
+
+char* getPlaca(Carro* carro){
+
+    return carro->placa;
+
+}
+
+
+int getPrevisaoRetirada(Carro *carro){
+
+    return carro->previsaoRetirada;
+
+}

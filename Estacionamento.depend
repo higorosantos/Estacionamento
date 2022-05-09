@@ -1,26 +1,50 @@
 # depslib dependency file v1.0
-1651428301 source:d:\projetos\c\estacionamento\main.c
+1651862298 source:d:\projetos\c\estacionamento\main.c
 	<stdio.h>
 	<stdlib.h>
-	"fileira.h"
+	<locale.h>
+	"menu.h"
 
-1651437633 source:d:\projetos\c\estacionamento\rua.c
+1651775360 source:d:\projetos\c\estacionamento\rua.c
 	"rua.h"
 
-1651508641 source:d:\projetos\c\estacionamento\fileira.c
+1652124633 source:d:\projetos\c\estacionamento\fileira.c
 	"fileira.h"
 
-1651437084 d:\projetos\c\estacionamento\fileira.h
+1652117294 d:\projetos\c\estacionamento\fileira.h
 	"carro.h"
 
-1651610111 d:\projetos\c\estacionamento\carro.h
+1652033944 d:\projetos\c\estacionamento\carro.h
 	"stdio.h"
-	"string.h"
+	<string.h>
 	<stdlib.h>
 
 1651437422 d:\projetos\c\estacionamento\rua.h
 	"carro.h"
 
-1651557091 source:d:\projetos\c\estacionamento\carro.c
+1652124145 source:d:\projetos\c\estacionamento\carro.c
 	"carro.h"
+
+1652124576 source:d:\projetos\c\estacionamento\estacionamento.c
+	"estacionamento.h"
+
+1652120474 d:\projetos\c\estacionamento\estacionamento.h
+	"carro.h"
+	"fileira.h"
+
+1652126385 source:d:\projetos\c\estacionamento\menu.c
+	"menu.h"
+
+1652125592 d:\projetos\c\estacionamento\menu.h
+	"utils.h"
+	"estacionamento.h"
+	<conio.h>
+
+1651854445 source:d:\projetos\c\estacionamento\utils.c
+	"utils.h"
+
+1651854461 d:\projetos\c\estacionamento\utils.h
+	<windows.h>
+	<stdio.h>
+	<stdlib.h>
 

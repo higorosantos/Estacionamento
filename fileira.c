@@ -3,9 +3,9 @@
 struct _pilha {
 
     Carro **arr;
-    //Numero de elementos
+    //NUMERO DE ELEMENTO NA PILHA
     int n;
-    //tamanho maximo de elementos
+    //TAMANHO MAXIMO DE ELEMENTOS NA PILHA
     int tam;
 
 };
@@ -37,7 +37,7 @@ Pilha* pilha_cria(int tam){
 
 }
 
-int pilha_push(Pilha *pilha, char placa[TAM_PLACA], int previsaoRetirada){
+int pilha_push(Pilha *pilha, Carro *carro){
 
     if(pilha->n == pilha->tam){
 
@@ -45,17 +45,13 @@ int pilha_push(Pilha *pilha, char placa[TAM_PLACA], int previsaoRetirada){
 
     }
 
-
-    Carro *novo = criar_carro(placa, previsaoRetirada);
-
-    if(novo == NULL){
+    if(carro == NULL){
 
         return -1;
     }
 
-    printf("\n%d", novo->placa);
 
-    pilha->arr[pilha->n] = novo;
+    pilha->arr[pilha->n] = carro;
 
     pilha->n++;
 
@@ -65,18 +61,18 @@ int pilha_push(Pilha *pilha, char placa[TAM_PLACA], int previsaoRetirada){
 
 
 
-int pilha_pop(Pilha *pilha){
+Carro* pilha_pop(Pilha *pilha){
 
     if(pilha->n == 0){
 
-        return -1;
+        return NULL;
 
     }
 
-    free(pilha->arr[pilha->n - 1]);
+    //free(pilha->arr[pilha->n - 1]);
     pilha->n--;
 
-    return 1;
+    return pilha->arr[pilha->n];
 
 }
 
@@ -89,6 +85,42 @@ int pilha_vazia(Pilha *pilha){
     }
 
     return 0;
+}
+
+int pilha_cheia(Pilha *pilha){
+
+    if(pilha->n == pilha->tam){
+
+        return 1;
+
+    }
+
+    return 0;
+}
+
+
+//RETORNA A PREVISÃO DE SAIDA DO CARRO DO TOPO DA PILHA
+int pilha_saida_topo(Pilha *p){
+
+    return getPrevisaoRetirada(p->arr[p->n - 1]);
+
+}
+
+//PROCURA O CARRO PELA PLACA VERIFICANDO SE ELA ESTA NESSA FILEIRA RETORNADO 1 SE SIM E -1 SE NÃO
+int busca_carro(Pilha *p, char placa[TAM_PLACA]){
+
+
+    for(int i = 0; i < p->n; i++){
+
+        if(strcmp(placa, getPlaca(p->arr[i])) == 0){
+
+            return 1;
+
+        }
+
+    }
+
+    return -1;
 }
 
 
