@@ -42,7 +42,7 @@ void menuPrincipal() {
                 interfaceInserirCarro(estaci);
                 break;
             case 4:
-                //interfaceRemoverCarro(estaci);
+                interfaceRemoverCarro(estaci);
                 break;
             case 5:
                 if(estaci == NULL){
@@ -57,7 +57,6 @@ void menuPrincipal() {
             default:
                 system("cls");
                 imprime_erro("ESCOLHA INVÁLIDA TENTE NOVAMENTE.");
-                aperte_enter();
                 break;
         }
     }
@@ -73,7 +72,7 @@ Estacionamento* interfaceConfigurarEstacionamento(Estacionamento *estaci){
     printf("\n-------------------------------------------------\n\n");
 
 
-    int rua,qtdFileiras,maxFileiras;
+    int maxRua,qtdFileiras,maxFileiras;
 
     mudar_cor(3);
     printf("\nQual quantide de fileira que o estacionamento deve ter? ");
@@ -82,11 +81,11 @@ Estacionamento* interfaceConfigurarEstacionamento(Estacionamento *estaci){
     printf("\nQual quantide máxima de carro por fileiras? ");
     scanf("%d", &maxFileiras);
 
-    printf("\nQual quantidade máxima de carros na rua? ");
-    scanf("%d", &rua);
+    printf("\nQual quantidade máxima de carros na rua(recomendamos que seja pelo menos %d)? ", maxFileiras - 1);
+    scanf("%d", &maxRua);
     cor_padrao();
 
-    estaci = criar_estacionamento(qtdFileiras, maxFileiras);
+    estaci = criar_estacionamento(qtdFileiras, maxFileiras, maxRua);
 
     if(estaci == NULL){
 
@@ -117,13 +116,16 @@ void interfaceInserirCarro(Estacionamento *estaci){
 
      }else{
 
-        int previsaoSaida, fileira, resultado;
-        char placa[TAM_PLACA];
         Carro *carro = NULL;
 
+        int previsaoSaida, fileira, resultado;
+        char *placa = NULL;
+
+
+
         mudar_cor(3);
-        printf("\nQual a placa do veiculo? ");
-        scanf("%s", placa);
+
+        placa = capturar_placa();
 
         printf("\nQuanto tempo ele irá permanecer no estacionamento(em horas)? ");
         scanf("%d", &previsaoSaida);
@@ -200,6 +202,102 @@ void interfaceInserirCarro(Estacionamento *estaci){
 
      cor_padrao();
 }
+
+void interfaceRemoverCarro(Estacionamento *estaci){
+
+     system("cls");
+
+     int resultado;
+     char *placa = NULL;
+
+     mudar_cor(1);
+     printf("\n\n              REMOVER CARRO");
+     printf("\n-------------------------------------------------\n\n");
+
+     if(estaci == NULL){
+        system("cls");
+        imprime_erro("ESTACIONAMENTO NÃO CONFIGURADO, CONFIGURE UM ANTES DE CONTINUAR.");
+
+     }else{
+
+         mudar_cor(3);
+
+         placa = capturar_placa();
+
+
+         resultado = remover_carro(estaci, placa);
+
+         if(resultado == -1){
+
+            imprime_erro("CARRO NÃO ENCONTRADO.");
+
+         }else{
+
+            char msg[MSG_SIZE];
+
+            sprintf(msg,"\nCARRO COM A PLACA %s FOI REMOVIDO.\n", placa);
+            imprime_sucesso(msg);
+
+         }
+
+     }
+
+
+}
+
+char* capturar_placa(){
+
+     char *placa = (char*)malloc(TAM_PLACA * sizeof(char));
+
+     int validacao;
+
+     do{
+         mudar_cor(3);
+         printf("\nDigite a placa do carro: ");
+
+         fflush(stdin);
+
+         fgets(placa, TAM_PLACA, stdin);
+
+         validacao = validarPlaca(placa);
+
+         if(validacao == -1){
+
+            imprime_erro("PLACA COM FORMATO INCORRETO.");
+
+         }
+
+     }while(validacao == -1);
+
+     return placa;
+}
+
+int validarPlaca(char* placa){
+
+     if(strlen(placa) != (TAM_PLACA - 1)){
+
+            return -1;
+     }
+
+
+    for(int i = 0; i < (TAM_PLACA - 1) ; i++){
+
+        if(i < 3 && (placa[i] > 90 || placa[i] < 65)){
+
+            return -1;
+
+        }else if(i >= 3 && (placa[i] > 57 || placa[i] < 48)){
+
+            return -1;
+
+        }
+    }
+
+    return 1;
+
+}
+
+
 
 
 

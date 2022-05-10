@@ -59,8 +59,6 @@ int pilha_push(Pilha *pilha, Carro *carro){
 
 }
 
-
-
 Carro* pilha_pop(Pilha *pilha){
 
     if(pilha->n == 0){
@@ -69,7 +67,6 @@ Carro* pilha_pop(Pilha *pilha){
 
     }
 
-    //free(pilha->arr[pilha->n - 1]);
     pilha->n--;
 
     return pilha->arr[pilha->n];
@@ -98,6 +95,11 @@ int pilha_cheia(Pilha *pilha){
     return 0;
 }
 
+int getQtdCarros(Pilha *pilha){
+
+    return pilha->n;
+
+}
 
 //RETORNA A PREVISÃO DE SAIDA DO CARRO DO TOPO DA PILHA
 int pilha_saida_topo(Pilha *p){

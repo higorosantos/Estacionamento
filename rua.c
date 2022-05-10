@@ -82,19 +82,23 @@ int fila_vazia(Rua *rua){
         return 1;
     }
 
-    return 0;
+    return -1;
 }
 
-int remove_fila(Rua *rua){
+Carro* remove_fila(Rua *rua){
 
-    if(fila_vazia(rua) == 0){
+    Carro* aux;
 
-        return 0;
+    if(fila_vazia(rua) == 1){
+
+        return NULL;
     }
+
+    aux = rua->inicio;
 
     rua->inicio = rua->inicio->prox;
     rua->n--;
 
-    return 1;
+    return aux;
 }
 

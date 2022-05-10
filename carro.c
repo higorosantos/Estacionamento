@@ -21,7 +21,6 @@ Carro* criar_carro(char placa[TAM_PLACA], int previsaoRetirada){
     newCarro->previsaoRetirada = previsaoRetirada;
     strcpy(newCarro->placa, placa);
 
-
     return newCarro;
 }
 

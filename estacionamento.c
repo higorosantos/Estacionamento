@@ -1,6 +1,6 @@
 #include "estacionamento.h"
 
-Estacionamento* criar_estacionamento(int qtdFileiras, int maxFileiras){
+Estacionamento* criar_estacionamento(int qtdFileiras, int maxFileiras, int maxRua){
 
     Estacionamento *estaci = (Estacionamento*)malloc(sizeof(Estacionamento));
 
@@ -20,13 +20,24 @@ Estacionamento* criar_estacionamento(int qtdFileiras, int maxFileiras){
 
     }
 
+    estaci->rua = cria_fila(maxRua);
+
+    if(estaci->rua == NULL){
+
+        free(estaci->rua);
+        free(estaci);
+        return NULL;
+    }
+
     for(int i = 0; i < qtdFileiras; i++){
 
         estaci->fileiras[i] = pilha_cria(maxFileiras);
 
+
         if(estaci->fileiras[i] == NULL){
 
             free(estaci->fileiras);
+            free(estaci->rua);
             free(estaci);
 
             return NULL;
@@ -36,11 +47,9 @@ Estacionamento* criar_estacionamento(int qtdFileiras, int maxFileiras){
     }
 
     estaci->qtdFileiras = qtdFileiras;
-    estaci->tamFileiras = maxFileiras;
 
     return estaci;
 }
-
 
 //RETORNA 1 SE FOR INSERIDO COM SUCESSO OU RETORNA -1 SE A FILEIRA ESCOLHIDA
 //ESTIVER CHEIA.
@@ -91,8 +100,6 @@ int procurar_vaga(Estacionamento *estaci, Carro *carro){
     //VAI PROCURAR A FILEIRA COM A MENOR DIFERENÇA DE TEMPO E QUE NÃO ESTEJA CHEIA
     for(int i = 0; i < estaci->qtdFileiras; i++){
 
-        //printf("\n%d", pilha_saida_topo(estaci->fileiras[i]));
-
         printf("\n%d", getPrevisaoRetirada(carro));
 
         aux = getPrevisaoRetirada(carro) - pilha_saida_topo(estaci->fileiras[i]);
@@ -119,3 +126,58 @@ int procurar_vaga(Estacionamento *estaci, Carro *carro){
     return fileira;
 
 }
+
+int remover_carro(Estacionamento *estaci, char *placa){
+
+    int fileira = -1, resultado;
+    Carro *carro;
+
+    for(int i = 0; i < estaci->qtdFileiras; i++){
+
+        if(busca_carro(estaci->fileiras[i],placa) == 1){
+
+            fileira = i;
+            break;
+        }
+
+    }
+
+    if(fileira == -1){
+        return -1;
+    }
+
+    for(int i = 0; i < getQtdCarros(estaci->fileiras[fileira]); i++){
+
+        carro = pilha_pop(estaci->fileiras[fileira]);
+
+        if(strcmp(placa, getPlaca(carro)) == 0){
+
+            free(carro);
+
+            carro = remove_fila(estaci->rua);
+
+            while(carro != NULL){
+
+                pilha_push(estaci->fileiras[fileira],carro);
+
+            }
+
+            return 1;
+
+        }else{
+
+           resultado = insere_fila(estaci->rua, carro);
+
+           if(resultado == -1){
+
+
+           }
+
+        }
+
+    }
+
+    return -1;
+
+}
+

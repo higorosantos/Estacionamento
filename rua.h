@@ -9,6 +9,6 @@ Rua* cria_fila(int tam);
 
 int insere_fila(Rua* rua, Carro *carro);
 
-int remove_fila(Rua* rua);
+Carro* remove_fila(Rua* rua);
 
 int fila_vazia(Rua* rua);

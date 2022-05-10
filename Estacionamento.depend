@@ -5,37 +5,38 @@
 	<locale.h>
 	"menu.h"
 
-1651775360 source:d:\projetos\c\estacionamento\rua.c
+1652132115 source:d:\projetos\c\estacionamento\rua.c
 	"rua.h"
 
-1652124633 source:d:\projetos\c\estacionamento\fileira.c
+1652201190 source:d:\projetos\c\estacionamento\fileira.c
 	"fileira.h"
 
-1652117294 d:\projetos\c\estacionamento\fileira.h
+1652130590 d:\projetos\c\estacionamento\fileira.h
 	"carro.h"
 
-1652033944 d:\projetos\c\estacionamento\carro.h
+1652200708 d:\projetos\c\estacionamento\carro.h
 	"stdio.h"
 	<string.h>
 	<stdlib.h>
 
-1651437422 d:\projetos\c\estacionamento\rua.h
+1652131938 d:\projetos\c\estacionamento\rua.h
 	"carro.h"
 
-1652124145 source:d:\projetos\c\estacionamento\carro.c
+1652201075 source:d:\projetos\c\estacionamento\carro.c
 	"carro.h"
 
-1652124576 source:d:\projetos\c\estacionamento\estacionamento.c
+1652201275 source:d:\projetos\c\estacionamento\estacionamento.c
 	"estacionamento.h"
 
-1652120474 d:\projetos\c\estacionamento\estacionamento.h
+1652132337 d:\projetos\c\estacionamento\estacionamento.h
 	"carro.h"
 	"fileira.h"
+	"rua.h"
 
-1652126385 source:d:\projetos\c\estacionamento\menu.c
+1652201357 source:d:\projetos\c\estacionamento\menu.c
 	"menu.h"
 
-1652125592 d:\projetos\c\estacionamento\menu.h
+1652196006 d:\projetos\c\estacionamento\menu.h
 	"utils.h"
 	"estacionamento.h"
 	<conio.h>

@@ -18,3 +18,6 @@ int pilha_cheia(Pilha *pilha);
 
 //RETORNA A PREVISÃO DE SAIDA DO CARRO DO TOPO DA PILHA
 int pilha_saida_topo(Pilha *p);
+
+//RETORNA A QUANTIDADE DE CARROS NA FILEIRA
+int getQtdCarros(Pilha *pilha);

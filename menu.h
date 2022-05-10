@@ -11,3 +11,7 @@ void interfaceInserirCarro(Estacionamento *estaci);
 void interfaceRemoverCarro(Estacionamento *estaci);
 
 Estacionamento* interfaceConfigurarEstacionamento(Estacionamento *estaci);
+
+char* capturar_placa();
+
+int validarPlaca(char *placa);
