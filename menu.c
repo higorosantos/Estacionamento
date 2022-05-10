@@ -86,7 +86,7 @@ Estacionamento* interfaceConfigurarEstacionamento(Estacionamento *estaci){
     scanf("%d", &maxRua);
     cor_padrao();
 
-    estaci = criar_estacionamento(qtdFileiras, maxFileiras, maxRua);
+    estaci = criar_estacionamento(abs(qtdFileiras), abs(maxFileiras), abs(maxRua));
 
     if(estaci == NULL){
 
@@ -131,7 +131,7 @@ void interfaceInserirCarro(Estacionamento *estaci){
         printf("\nQuanto tempo ele irá permanecer no estacionamento(em horas)? ");
         scanf("%d", &previsaoSaida);
 
-        carro = criar_carro(placa, previsaoSaida);
+        carro = criar_carro(placa, abs(previsaoSaida));
 
         if(carro == NULL){
 

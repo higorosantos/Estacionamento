@@ -5,7 +5,7 @@
 	<locale.h>
 	"menu.h"
 
-1652132115 source:d:\projetos\c\estacionamento\rua.c
+1652208641 source:d:\projetos\c\estacionamento\rua.c
 	"rua.h"
 
 1652201190 source:d:\projetos\c\estacionamento\fileira.c
@@ -19,13 +19,13 @@
 	<string.h>
 	<stdlib.h>
 
-1652131938 d:\projetos\c\estacionamento\rua.h
+1652208298 d:\projetos\c\estacionamento\rua.h
 	"carro.h"
 
 1652201075 source:d:\projetos\c\estacionamento\carro.c
 	"carro.h"
 
-1652201275 source:d:\projetos\c\estacionamento\estacionamento.c
+1652206397 source:d:\projetos\c\estacionamento\estacionamento.c
 	"estacionamento.h"
 
 1652132337 d:\projetos\c\estacionamento\estacionamento.h
@@ -33,7 +33,7 @@
 	"fileira.h"
 	"rua.h"
 
-1652202005 source:d:\projetos\c\estacionamento\menu.c
+1652202901 source:d:\projetos\c\estacionamento\menu.c
 	"menu.h"
 
 1652196006 d:\projetos\c\estacionamento\menu.h
