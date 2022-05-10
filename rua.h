@@ -3,13 +3,13 @@
 typedef struct _rua Rua;
 
 
-Rua* cria_fila(int tam);
+Rua* criar_rua(int tam);
 
-int insere_fila(Rua* rua, Carro *carro);
+int inserir_rua(Rua* rua, Carro *carro);
 
-Carro* remove_fila(Rua* rua);
+Carro* remove_rua(Rua* rua);
 
-int fila_vazia(Rua* rua);
+int rua_vazia(Rua* rua);
 
 void imprime_placa_rua(Rua *rua);
 

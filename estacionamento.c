@@ -20,7 +20,7 @@ Estacionamento* criar_estacionamento(int qtdFileiras, int maxFileiras, int maxRu
 
     }
 
-    estaci->rua = cria_fila(maxRua);
+    estaci->rua = criar_rua(maxRua);
 
     if(estaci->rua == NULL){
 
@@ -41,12 +41,13 @@ Estacionamento* criar_estacionamento(int qtdFileiras, int maxFileiras, int maxRu
             free(estaci);
 
             return NULL;
-
         }
 
     }
 
     estaci->qtdFileiras = qtdFileiras;
+
+
 
     return estaci;
 }
@@ -151,24 +152,22 @@ int remover_carro(Estacionamento *estaci, char *placa){
 
     while(strcmp(placa, getPlaca(carro)) != 0){
 
-        resultado = insere_fila(estaci->rua, carro);
-
-        printf("INSERINDO NA FILA %d", resultado);
+        resultado = inserir_rua(estaci->rua, carro);
 
         carro = pilha_pop(estaci->fileiras[fileira]);
 
     }
 
+    imprime_rua(estaci);
+
     free(carro);
 
-    carro = remove_fila(estaci->rua);
+    carro = remove_rua(estaci->rua);
 
     while(carro != NULL){
 
-        carro = remove_fila(estaci->rua);
+        carro = remove_rua(estaci->rua);
         int teste = pilha_push(estaci->fileiras[fileira],carro);
-
-        printf("PILHA PUSH %d", teste);
 
     }
 

@@ -36,8 +36,13 @@ void menuPrincipal() {
                 estaci = interfaceConfigurarEstacionamento(estaci);
                 break;
             case 2:
-                imprime_estaci(estaci);
-                imprime_rua(estaci);
+                if(estaci == NULL){
+                    system("cls");
+                    imprime_erro("ESTACIONAMENTO NÃO CONFIGURADO!");
+                }else{
+                    imprime_estaci(estaci);
+                    imprime_rua(estaci);
+                }
                 break;
             case 3:
                 interfaceInserirCarro(estaci);

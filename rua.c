@@ -3,61 +3,56 @@
 struct _rua {
 
     int n;
-    int ini;
     int tam;
-
     Carro **arr;
 };
 
 
-Rua* cria_fila(int tam){
+Rua* criar_rua(int tam){
 
-    Rua *fila = (Rua*)malloc(sizeof(Rua));
+    Rua *rua = (Rua*)calloc(1,sizeof(Rua));
 
 
-    if(fila == NULL){
+    if(rua == NULL){
 
         return NULL;
 
     }
 
-    fila->arr = (Carro**)malloc(tam * sizeof(Carro*));
+    rua->arr = (Carro**)calloc(tam, sizeof(Carro*));
 
-    if(fila->arr == NULL){
+    if(rua->arr == NULL){
 
-        free(fila);
+        free(rua);
         return NULL;
 
     }
 
-    fila->ini = 0;
-    fila->tam = tam;
 
-    fila->n = 0;
+    rua->tam = tam;
+    rua->n = 0;
 
-    return fila;
+    return rua;
 
 }
 
 
-int insere_fila(Rua* rua, Carro *carro)
+int inserir_rua(Rua* rua, Carro *carro)
 {
-    int fim;
-    if (rua->n == rua ) {
+
+    if (rua->n == rua->tam) {
 
         return -1;
     }
 
-    fim = (rua->ini + rua->n) % rua->tam;
-    rua->arr[fim] = carro;
+    rua->arr[rua->n] = carro;
+
     rua->n++;
 
-
     return 1;
-
 }
 
-int fila_vazia(Rua *rua){
+int rua_vazia(Rua *rua){
 
     if(rua->n == 0){
 
@@ -67,7 +62,8 @@ int fila_vazia(Rua *rua){
     return -1;
 }
 
-Carro* remove_fila(Rua *rua){
+//REMOVE DO INICIO
+Carro* remove_rua(Rua *rua){
 
     Carro *aux = NULL;
 
@@ -77,9 +73,19 @@ Carro* remove_fila(Rua *rua){
 
     }
 
-    aux = rua->arr[rua->ini];
-    rua->ini = (rua->ini + 1) % rua->tam;
+    aux = rua->arr[0];
+
+    rua->arr[0] == NULL;
+
     rua->n--;
+
+    for(int i = 0; i < rua->n; i++){
+
+        rua->arr[i] = rua->arr[i + 1];
+
+    }
+
+
 
     return aux;
 }
