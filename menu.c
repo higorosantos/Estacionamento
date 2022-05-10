@@ -81,7 +81,8 @@ Estacionamento* interfaceConfigurarEstacionamento(Estacionamento *estaci){
     printf("\nQual quantide máxima de carro por fileiras? ");
     scanf("%d", &maxFileiras);
 
-    printf("\nQual quantidade máxima de carros na rua(recomendamos que seja pelo menos %d)? ", maxFileiras - 1);
+    printf("\nRecomendamos que tenha pelo menos %d espaços na rua.", maxFileiras - 1);
+    printf("\nQual quantidade máxima de carros na rua? ");
     scanf("%d", &maxRua);
     cor_padrao();
 
@@ -235,7 +236,7 @@ void interfaceRemoverCarro(Estacionamento *estaci){
 
             char msg[MSG_SIZE];
 
-            sprintf(msg,"\nCARRO COM A PLACA %s FOI REMOVIDO.\n", placa);
+            sprintf(msg,"\nCARRO COM A PLACA %s FOI REMOVIDO COM SUCESSO.\n", placa);
             imprime_sucesso(msg);
 
          }

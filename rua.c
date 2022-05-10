@@ -94,7 +94,7 @@ Carro* remove_fila(Rua *rua){
         return NULL;
     }
 
-    aux = rua->inicio;
+    aux = rua->inicio->carro;
 
     rua->inicio = rua->inicio->prox;
     rua->n--;
