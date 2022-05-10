@@ -185,3 +185,10 @@ void imprime_estaci(Estacionamento *estaci){
         printf("\n\n");
     }
 }
+
+void imprime_rua(Estacionamento *estaci){
+    printf("\r--- RUA ---\n");
+    imprime_placa_rua(estaci->rua);
+    imprime_tempo_rua(estaci->rua);
+    printf("\n\n");
+}
