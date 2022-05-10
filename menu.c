@@ -36,7 +36,7 @@ void menuPrincipal() {
                 estaci = interfaceConfigurarEstacionamento(estaci);
                 break;
             case 2:
-
+                imprime_estaci(estaci);
                 break;
             case 3:
                 interfaceInserirCarro(estaci);

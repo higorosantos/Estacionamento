@@ -26,4 +26,4 @@ int procurar_vaga(Estacionamento *estaci, Carro *carro);
 
 int remover_carro(Estacionamento *estaci, char *placa);
 
-
+void imprime_estaci(Estacionamento *estaci);
