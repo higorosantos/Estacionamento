@@ -146,38 +146,33 @@ int remover_carro(Estacionamento *estaci, char *placa){
         return -1;
     }
 
-    for(int i = 0; i < getQtdCarros(estaci->fileiras[fileira]); i++){
+
+    carro = pilha_pop(estaci->fileiras[fileira]);
+
+    while(strcmp(placa, getPlaca(carro)) != 0){
+
+        resultado = insere_fila(estaci->rua, carro);
+
+        printf("INSERINDO NA FILA %d", resultado);
 
         carro = pilha_pop(estaci->fileiras[fileira]);
 
-        if(strcmp(placa, getPlaca(carro)) == 0){
+    }
 
-            free(carro);
+    free(carro);
 
-            carro = remove_fila(estaci->rua);
+    carro = remove_fila(estaci->rua);
 
-            while(carro != NULL){
+    while(carro != NULL){
 
-                pilha_push(estaci->fileiras[fileira],carro);
+        carro = remove_fila(estaci->rua);
+        int teste = pilha_push(estaci->fileiras[fileira],carro);
 
-            }
-
-            return 1;
-
-        }else{
-
-           resultado = insere_fila(estaci->rua, carro);
-
-           if(resultado == -1){
-
-
-           }
-
-        }
+        printf("PILHA PUSH %d", teste);
 
     }
 
-    return -1;
+    return 1;
 
 }
 

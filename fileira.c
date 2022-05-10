@@ -14,14 +14,14 @@ struct _pilha {
 //Recebe como parametro o tamanho max de carro da fileira
 Pilha* pilha_cria(int tam){
 
-    Pilha *pilha = (Pilha*)malloc(sizeof(Pilha));
+    Pilha *pilha = (Pilha*)calloc(1, sizeof(Pilha));
 
     if(pilha == NULL){
 
         return NULL;
     }
 
-    pilha->arr= (Carro**)malloc(tam * sizeof(Carro*));
+    pilha->arr= (Carro**)calloc(tam, sizeof(Carro*));
 
     if(pilha->arr == NULL){
 
