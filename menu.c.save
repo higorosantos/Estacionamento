@@ -303,9 +303,7 @@ void imprime_total(Estacionamento * estaci){
         system("cls");
         imprime_erro("ESTACIONAMENTO NÃO CONFIGURADO!");
     }else{
-        mudar_cor(1);
         printf("\n--- ESTACIONAMENTO - TOTAL DE VAGAS: %d ---\n\n", estaci->totalVagas);
-        mudar_cor(3);
         imprime_estaci(estaci);
         imprime_rua(estaci);
     }

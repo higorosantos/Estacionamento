@@ -11,6 +11,7 @@ Estacionamento* criar_estacionamento(int qtdFileiras, int maxFileiras, int maxRu
     }
 
     estaci->fileiras = (Pilha**)malloc(qtdFileiras * sizeof(Pilha*));
+    estaci->totalVagas = (int*)malloc(sizeof(int));
 
 
     if(estaci == NULL){
@@ -45,18 +46,14 @@ Estacionamento* criar_estacionamento(int qtdFileiras, int maxFileiras, int maxRu
 
     }
 
-    Carro *gol = criar_carro("ABD7458",42);
-
-    inserir_rua(estaci->rua, gol);
-
-    remove_rua(estaci->rua);
-
-    aperte_enter();
-
-
     estaci->qtdFileiras = qtdFileiras;
 
-
+    //Define um maximo de vagas disponiveis no estacionamento
+    if(maxRua + 1 >= maxFileiras){
+        estaci->totalVagas = qtdFileiras * maxFileiras;
+    } else {
+        estaci->totalVagas = qtdFileiras * maxFileiras - (maxFileiras - maxRua) + 1;
+    }
 
     return estaci;
 }
@@ -76,6 +73,7 @@ int inserir_carro(Estacionamento *estaci, Carro *carro, int fileira){
         printf("\n%d", fileira);
 
         pilha_push(estaci->fileiras[fileira] ,carro);
+        estaci->totalVagas--;
 
         return 1;
 
@@ -110,11 +108,7 @@ int procurar_vaga(Estacionamento *estaci, Carro *carro){
     //VAI PROCURAR A FILEIRA COM A MENOR DIFERENÇA DE TEMPO E QUE NÃO ESTEJA CHEIA
     for(int i = 0; i < estaci->qtdFileiras; i++){
 
-        printf("\n%d", getPrevisaoRetirada(carro));
-
         aux = getPrevisaoRetirada(carro) - pilha_saida_topo(estaci->fileiras[i]);
-
-
 
         if(pilha_saida_topo(estaci->fileiras[i]) > getPrevisaoRetirada(carro) && pilha_cheia(estaci->fileiras[i]) == 0){
 
@@ -139,7 +133,7 @@ int procurar_vaga(Estacionamento *estaci, Carro *carro){
 
 int remover_carro(Estacionamento *estaci, char *placa){
 
-    int fileira = -1, resultado;
+    int fileira = -1;
     Carro *carro;
 
     for(int i = 0; i < estaci->qtdFileiras; i++){
@@ -163,7 +157,7 @@ int remover_carro(Estacionamento *estaci, char *placa){
 
     while(strcmp(placa, getPlaca(carro)) != 0){
 
-        resultado = inserir_rua(estaci->rua, carro);
+        //resultado = inserir_rua(estaci->rua, carro);
 
         carro = pilha_pop(estaci->fileiras[fileira]);
 
@@ -179,7 +173,7 @@ int remover_carro(Estacionamento *estaci, char *placa){
 
     while(carro != NULL){
 
-        int teste = pilha_push(estaci->fileiras[fileira],carro);
+        //int teste = pilha_push(estaci->fileiras[fileira],carro);
         carro = remove_rua(estaci->rua);
 
 
