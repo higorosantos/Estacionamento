@@ -1,6 +1,7 @@
 #include "carro.h"
 #include "fileira.h"
 #include "rua.h"
+#include "utils.h"
 
 //typedef struct _estacionamento Estacionamento;
 

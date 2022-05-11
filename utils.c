@@ -18,7 +18,7 @@ void cor_padrao(){
 void imprime_erro(char erro[MSG_SIZE]) {
 
     mudar_cor(4);
-    printf("\n%s\n", erro);
+    printf("\n\t%s\n", erro);
     cor_padrao();
 }
 
@@ -26,14 +26,14 @@ void imprime_erro(char erro[MSG_SIZE]) {
 void imprime_sucesso(char sucesso[MSG_SIZE]) {
 
     mudar_cor(10);
-    printf("\n%s\n", sucesso);
+    printf("\n\t%s\n", sucesso);
     cor_padrao();
 }
 
 void aperte_enter(){
 
     mudar_cor(8);
-    printf("\nPressione ENTER para continuar.");
+    printf("\n\tPressione ENTER para continuar.");
     getchar();
     system("cls");
     cor_padrao();

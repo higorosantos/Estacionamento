@@ -16,12 +16,28 @@ int interfaceMenuPrincipal(){
     printf("\n\t5. Remover passo a passo.");
     printf("\n\t0. Sair.");
     mudar_cor(3);
-    printf("\n\nEntre com a opção desejada: ");
+    printf("\n\n\tEntre com a opção desejada: ");
     scanf("%d", &opcao);
     return opcao;
 
 }
 
+int interfaceMenuAdicionar(){
+
+
+    int opcao;
+    mudar_cor(1);
+    printf("\n\n               ESTACIONAMENTO");
+    printf("\n-------------------------------------------------");
+    mudar_cor(11);
+    printf("\n\n\t1. Estacionar carro no local recomendado.");
+    printf("\n\t2. Escolher uma fileira para estacionar o carro.");
+    mudar_cor(3);
+    printf("\n\n\tEntre com a opção desejada: ");
+    scanf("%d", &opcao);
+    return opcao;
+
+}
 
 //PARTE LOGICA DOS MENUS
 void menuPrincipal() {
@@ -62,6 +78,43 @@ void menuPrincipal() {
     }
 }
 
+void menuAdicionar(Estacionamento *estaci) {
+
+    int opcao_menu = -1;
+    while (opcao_menu != 0) {
+        opcao_menu = interfaceMenuAdicionar();
+        switch(opcao_menu) {
+            case 1:
+                estaci = interfaceConfigurarEstacionamento(estaci);
+                break;
+            case 2:
+                system("cls");
+                imprime_total(estaci);
+                break;
+            case 3:
+                interfaceInserirCarro(estaci);
+                break;
+            case 4:
+                interfaceRemoverCarro(estaci);
+                break;
+            case 5:
+                if(estaci == NULL){
+                    system("cls");
+                    imprime_erro("\tESTACIONAMENTO NÃO CONFIGURADO!");
+                }
+                break;
+            case 0:
+                printf("\n\n\nSaindo...\n\n");
+                exit(0);
+                break;
+            default:
+                system("cls");
+                imprime_erro("\tESCOLHA INVÁLIDA TENTE NOVAMENTE.");
+                break;
+        }
+    }
+}
+
 Estacionamento* interfaceConfigurarEstacionamento(Estacionamento *estaci){
 
 
@@ -75,14 +128,13 @@ Estacionamento* interfaceConfigurarEstacionamento(Estacionamento *estaci){
     int maxRua,qtdFileiras,maxFileiras;
 
     mudar_cor(3);
-    printf("\nQual quantide de fileira que o estacionamento deve ter? ");
+    printf("\n\tQual quantide de fileira que o estacionamento deve ter? ");
     scanf("%d", &qtdFileiras);
 
-    printf("\nQual quantide máxima de carro por fileiras? ");
+    printf("\n\tQual quantide máxima de carro por fileiras? ");
     scanf("%d", &maxFileiras);
 
-    printf("\nRecomendamos que tenha pelo menos %d espaços na rua.", maxFileiras - 1);
-    printf("\nQual quantidade máxima de carros na rua? ");
+    printf("\n\tQual quantidade máxima de carros na rua? ");
     scanf("%d", &maxRua);
     cor_padrao();
 
@@ -91,7 +143,7 @@ Estacionamento* interfaceConfigurarEstacionamento(Estacionamento *estaci){
     if(estaci == NULL){
 
         system("cls");
-        imprime_erro("ERRO!MEMORIA INSUFICIENTE, FECHE ALGUM PROCESSO E TENTE NOVAMENTE.\n\n");
+        imprime_erro("\tERRO!MEMORIA INSUFICIENTE, FECHE ALGUM PROCESSO E TENTE NOVAMENTE.\n\n");
         system("pause");
         exit(0);
 
@@ -113,7 +165,7 @@ void interfaceInserirCarro(Estacionamento *estaci){
 
      if(estaci == NULL){
         system("cls");
-        imprime_erro("ESTACIONAMENTO NÃO CONFIGURADO, CONFIGURE UM ANTES DE CONTINUAR.");
+        imprime_erro("\tESTACIONAMENTO NÃO CONFIGURADO, CONFIGURE UM ANTES DE CONTINUAR.");
 
      }else{
 
@@ -128,7 +180,7 @@ void interfaceInserirCarro(Estacionamento *estaci){
 
         placa = capturar_placa();
 
-        printf("\nQuanto tempo ele irá permanecer no estacionamento(em horas)? ");
+        printf("\n\tQuanto tempo ele irá permanecer no estacionamento(em horas)? ");
         scanf("%d", &previsaoSaida);
 
         carro = criar_carro(placa, abs(previsaoSaida));
@@ -136,7 +188,7 @@ void interfaceInserirCarro(Estacionamento *estaci){
         if(carro == NULL){
 
             system("cls");
-            imprime_erro("ERRO AO ALOCAR MEMORIA, PORFAVOR FECHE ALGUM PROCESSO E TENTE NOVAMENTE.");
+            imprime_erro("\tERRO AO ALOCAR MEMORIA, PORFAVOR FECHE ALGUM PROCESSO E TENTE NOVAMENTE.");
 
         }else{
 
@@ -147,7 +199,7 @@ void interfaceInserirCarro(Estacionamento *estaci){
 
             do{
                 mudar_cor(3);
-                printf("\nDeseja colocar o veiculo nessa posição(S/N)? ");
+                printf("\n\tDeseja colocar o veiculo nessa posição(S/N)? ");
 
                 resposta = getch();
 
@@ -160,18 +212,18 @@ void interfaceInserirCarro(Estacionamento *estaci){
                         if(resultado == 1){
 
                             system("cls");
-                            imprime_sucesso("\nVEICULO INSERIDO AO ESTACIONAMENTO COM SUCESSO.\n");
+                            imprime_sucesso("\n\tVEICULO INSERIDO AO ESTACIONAMENTO COM SUCESSO.\n");
 
                         }else{
 
                             system("cls");
-                            imprime_erro("ESTACIONAMENTO CHEIO.");
+                            imprime_erro("\tESTACIONAMENTO CHEIO.");
                         }
                         break;
                     case 'n':
                         do{
                           mudar_cor(3);
-                          printf("\n\nDeseja inserir veiculo em qual fileira? ");
+                          printf("\n\n\tDeseja inserir veiculo em qual fileira? ");
                           scanf("%d", &fileira);
 
                           resultado = inserir_carro(estaci, carro, (fileira - 1));
@@ -179,18 +231,18 @@ void interfaceInserirCarro(Estacionamento *estaci){
                           if(resultado == 1){
 
                              system("cls");
-                             imprime_sucesso("\nVEICULO INSERIDO AO ESTACIONAMENTO COM SUCESSO.\n");
+                             imprime_sucesso("\n\tVEICULO INSERIDO AO ESTACIONAMENTO COM SUCESSO.\n");
 
                           }else{
 
-                             imprime_erro("\nFILEIRA INVALIDA OU CHEIA.");
+                             imprime_erro("\n\tFILEIRA INVALIDA OU CHEIA.");
                           }
 
                         }while(resultado == -1);
 
                         break;
                     default:
-                        imprime_erro("\nRESPOSTA INVALIDA.\n");
+                        imprime_erro("\n\tRESPOSTA INVALIDA.\n");
                         break;
                 }
 
@@ -217,7 +269,7 @@ void interfaceRemoverCarro(Estacionamento *estaci){
 
      if(estaci == NULL){
         system("cls");
-        imprime_erro("ESTACIONAMENTO NÃO CONFIGURADO, CONFIGURE UM ANTES DE CONTINUAR.");
+        imprime_erro("\tESTACIONAMENTO NÃO CONFIGURADO, CONFIGURE UM ANTES DE CONTINUAR.");
 
      }else{
 
@@ -225,18 +277,17 @@ void interfaceRemoverCarro(Estacionamento *estaci){
 
          placa = capturar_placa();
 
-
          resultado = remover_carro(estaci, placa);
 
          if(resultado == -1){
 
-            imprime_erro("CARRO NÃO ENCONTRADO.");
+            imprime_erro("\tCARRO NÃO ENCONTRADO.");
 
          }else{
 
             char msg[MSG_SIZE];
 
-            sprintf(msg,"\nCARRO COM A PLACA %s FOI REMOVIDO COM SUCESSO.\n", placa);
+            sprintf(msg,"\n\tCARRO COM A PLACA %s FOI REMOVIDO COM SUCESSO.\n", placa);
             imprime_sucesso(msg);
 
          }
@@ -254,7 +305,7 @@ char* capturar_placa(){
 
      do{
          mudar_cor(3);
-         printf("\nDigite a placa do carro: ");
+         printf("\n\tDigite a placa do carro: ");
 
          fflush(stdin);
 
@@ -264,7 +315,7 @@ char* capturar_placa(){
 
          if(validacao == -1){
 
-            imprime_erro("PLACA COM FORMATO INCORRETO.");
+            imprime_erro("\tPLACA COM FORMATO INCORRETO.");
 
          }
 
@@ -301,14 +352,24 @@ int validarPlaca(char* placa){
 void imprime_total(Estacionamento * estaci){
     if(estaci == NULL){
         system("cls");
-        imprime_erro("ESTACIONAMENTO NÃO CONFIGURADO!");
+        imprime_erro("\tESTACIONAMENTO NÃO CONFIGURADO!");
     }else{
         mudar_cor(1);
-        printf("\n--- ESTACIONAMENTO - TOTAL DE VAGAS: %d ---\n\n", estaci->totalVagas);
+        printf("\n\t--- ESTACIONAMENTO - TOTAL DE VAGAS: %d ---\n\n", estaci->totalVagas);
         mudar_cor(3);
         imprime_estaci(estaci);
         imprime_rua(estaci);
     }
 }
 
+void bem_vindo(){
+    mudar_cor(1);
+    printf("\n\t _____________________________________________");
+    printf("\n\t|                                             |");
+    printf("\n\t|           BEM VINDO AO GERADOR DE           |");
+    printf("\n\t|             ESTACIONAMENTO 1.0              |");
+    printf("\n\t|_____________________________________________|");
+    printf("\n\n");
+    aperte_enter();
+}
 

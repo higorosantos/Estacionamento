@@ -97,11 +97,18 @@ Carro* remove_rua(Rua *rua){
     return aux;
 }
 
+void imprime_espaco(Rua *rua){
+    for(int i = rua->tam-1; i >= 0; i--){
+        printf(" |                ");
+    }
+    printf(" |\n");
+}
+
 void imprime_placa_rua(Rua *rua){
     for(int i = rua->tam-1; i >= 0; i--){
         printf(" | ");
             if(getPlaca(rua->arr[i]) == NULL){
-                printf("     PLACA     ");
+                printf("   VAGA VAZIA  ");
             } else {
                 printf(" placa: %s ",getPlaca(rua->arr[i]));
             }
@@ -113,7 +120,7 @@ void imprime_tempo_rua(Rua *rua){
     for(int i = rua->tam-1; i >= 0; i--){
         printf(" | ");
             if(getPlaca(rua->arr[i]) == NULL){
-                printf("     TEMPO     ");
+                printf("               ");
             } else {
                 printf("   tempo: %.2dhs  ",getPrevisaoRetirada(rua->arr[i]));
             }

@@ -1,6 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <conio.h>
 #include "utils.h"
 #include "estacionamento.h"
-#include <conio.h>
+
 
 int interfaceMenuPrincipal();
 
@@ -17,3 +21,5 @@ char* capturar_placa();
 int validarPlaca(char *placa);
 
 void imprime_total(Estacionamento * estaci);
+
+void bem_vindo();

@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
 #include "utils.h"
 #include "estacionamento.h"
 #include <conio.h>

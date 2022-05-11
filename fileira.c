@@ -138,7 +138,7 @@ void imprime_carro(Pilha *p){
     for(int i = p->tam-1; i >= 0; i--){
         printf(" | ");
             if(getPlaca(p->arr[i]) == NULL){
-                printf("   VAGA VAZIA  ");
+                printf("               ");
             } else {
                 printf("    Carro %.2d    ",i + 1 );
             }
@@ -150,7 +150,7 @@ void imprime_placa(Pilha *p){
     for(int i = p->tam-1; i >= 0; i--){
         printf(" | ");
             if(getPlaca(p->arr[i]) == NULL){
-                printf("     PLACA     ");
+                printf("  VAGA VAZIA   ");
             } else {
                 printf(" placa: %s ",getPlaca(p->arr[i]));
             }
@@ -162,7 +162,7 @@ void imprime_tempo(Pilha *p){
     for(int i = p->tam-1; i >= 0; i--){
         printf(" | ");
             if(getPlaca(p->arr[i]) == NULL){
-                printf("     TEMPO     ");
+                printf("               ");
             } else {
                 printf("   tempo: %.2dhs  ",getPrevisaoRetirada(p->arr[i]));
             }

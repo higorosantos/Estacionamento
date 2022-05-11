@@ -11,8 +11,6 @@ Estacionamento* criar_estacionamento(int qtdFileiras, int maxFileiras, int maxRu
     }
 
     estaci->fileiras = (Pilha**)malloc(qtdFileiras * sizeof(Pilha*));
-    estaci->totalVagas = (int*)malloc(sizeof(int));
-
 
     if(estaci == NULL){
 
@@ -70,7 +68,7 @@ int inserir_carro(Estacionamento *estaci, Carro *carro, int fileira){
 
     if(pilha_cheia(estaci->fileiras[fileira]) == 0){
 
-        printf("\n%d", fileira);
+        //printf("\n%d", fileira);
 
         pilha_push(estaci->fileiras[fileira] ,carro);
         estaci->totalVagas--;
@@ -169,7 +167,7 @@ int remover_carro(Estacionamento *estaci, char *placa){
 
     carro = remove_rua(estaci->rua);
 
-    printf("PLACA DO CARRO QUE ESTA SENDO POPADO: %s \n",getPlaca(carro));
+    //printf("PLACA DO CARRO QUE ESTA SENDO POPADO: %s \n",getPlaca(carro));
 
     while(carro != NULL){
 
@@ -185,16 +183,26 @@ int remover_carro(Estacionamento *estaci, char *placa){
 
 void imprime_estaci(Estacionamento *estaci){
     for(int i = 0; i < estaci->qtdFileiras; i++){
-        printf("--- Fileira %d ---\n", i + 1);
+        mudar_cor(3);
+        printf("|    |");
+        mudar_cor(1);
+        printf("\t--- Fileira %d ---\n", i + 1);
+        mudar_cor(3);
+        printf("| R ");
         imprime_carro(estaci->fileiras[i]);
+        printf("| U ");
         imprime_placa(estaci->fileiras[i]);
+        printf("| A ");
         imprime_tempo(estaci->fileiras[i]);
-        printf("\n\n");
+        printf("|    |\n");
     }
 }
 
 void imprime_rua(Estacionamento *estaci){
-    printf("\r--- RUA ---\n");
+    mudar_cor(1);
+    printf("\n\t--- RUA ---\n");
+    mudar_cor(3);
+    imprime_espaco(estaci->rua);
     imprime_placa_rua(estaci->rua);
     imprime_tempo_rua(estaci->rua);
     printf("\n\n");

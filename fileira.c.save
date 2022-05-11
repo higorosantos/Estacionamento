@@ -14,14 +14,14 @@ struct _pilha {
 //Recebe como parametro o tamanho max de carro da fileira
 Pilha* pilha_cria(int tam){
 
-    Pilha *pilha = (Pilha*)malloc(sizeof(Pilha));
+    Pilha *pilha = (Pilha*)calloc(1, sizeof(Pilha));
 
     if(pilha == NULL){
 
         return NULL;
     }
 
-    pilha->arr= (Carro**)malloc(tam * sizeof(Carro*));
+    pilha->arr= (Carro**)calloc(tam, sizeof(Carro*));
 
     if(pilha->arr == NULL){
 
@@ -53,6 +53,8 @@ int pilha_push(Pilha *pilha, Carro *carro){
 
     pilha->arr[pilha->n] = carro;
 
+    printf("FOI ADCIONADO A O INDICE %d", pilha->n);
+
     pilha->n++;
 
     return 1;
@@ -60,6 +62,8 @@ int pilha_push(Pilha *pilha, Carro *carro){
 }
 
 Carro* pilha_pop(Pilha *pilha){
+
+    Carro *aux = NULL;
 
     if(pilha->n == 0){
 
@@ -69,7 +73,12 @@ Carro* pilha_pop(Pilha *pilha){
 
     pilha->n--;
 
-    return pilha->arr[pilha->n];
+    aux = pilha->arr[pilha->n];
+
+    pilha->arr[pilha->n] = NULL;
+
+
+    return aux;
 
 }
 
@@ -129,7 +138,7 @@ void imprime_carro(Pilha *p){
     for(int i = p->tam-1; i >= 0; i--){
         printf(" | ");
             if(getPlaca(p->arr[i]) == NULL){
-                printf("   VAGA VAZIA  ");
+                printf("               ");
             } else {
                 printf("    Carro %.2d    ",i + 1 );
             }
@@ -141,7 +150,7 @@ void imprime_placa(Pilha *p){
     for(int i = p->tam-1; i >= 0; i--){
         printf(" | ");
             if(getPlaca(p->arr[i]) == NULL){
-                printf("     PLACA     ");
+                printf("VAGA VAZ     ");
             } else {
                 printf(" placa: %s ",getPlaca(p->arr[i]));
             }
