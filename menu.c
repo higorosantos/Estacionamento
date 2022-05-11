@@ -52,6 +52,7 @@ void menuPrincipal() {
                 estaci = interfaceConfigurarEstacionamento(estaci);
                 break;
             case 2:
+                system("cls");
                 imprime_total(estaci);
                 break;
             case 3:

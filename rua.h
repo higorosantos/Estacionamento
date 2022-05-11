@@ -14,3 +14,5 @@ int rua_vazia(Rua* rua);
 void imprime_placa_rua(Rua *rua);
 
 void imprime_tempo_rua(Rua *rua);
+
+void imprime_espaco(Rua *rua);

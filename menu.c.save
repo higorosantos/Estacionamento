@@ -52,6 +52,7 @@ void menuPrincipal() {
                 estaci = interfaceConfigurarEstacionamento(estaci);
                 break;
             case 2:
+                system("cls");
                 imprime_total(estaci);
                 break;
             case 3:
@@ -88,6 +89,7 @@ void menuAdicionar(Estacionamento *estaci) {
                 estaci = interfaceConfigurarEstacionamento(estaci);
                 break;
             case 2:
+                system("cls");
                 imprime_total(estaci);
                 break;
             case 3:
@@ -354,7 +356,7 @@ void imprime_total(Estacionamento * estaci){
         imprime_erro("\tESTACIONAMENTO NÃO CONFIGURADO!");
     }else{
         mudar_cor(1);
-        printf("\n--- ESTACIONAMENTO - TOTAL DE VAGAS: %d ---\n\n", estaci->totalVagas);
+        printf("\n\t--- ESTACIONAMENTO - TOTAL DE VAGAS: %d ---\n\n", estaci->totalVagas);
         mudar_cor(3);
         imprime_estaci(estaci);
         imprime_rua(estaci);

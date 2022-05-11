@@ -1,4 +1,5 @@
 #include "carro.h"
+#include "utils.h"
 
 
 typedef struct _pilha Pilha;

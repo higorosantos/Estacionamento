@@ -68,10 +68,11 @@
 	"utils.h"
 	"estacionamento.h"
 
-1652278219 c:\users\alice\documents\github\estacionamento\utils.h
+1652305377 c:\users\alice\documents\github\estacionamento\utils.h
 	<windows.h>
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 
 1652300624 c:\users\alice\documents\github\estacionamento\estacionamento.h
 	"carro.h"
@@ -79,10 +80,11 @@
 	"rua.h"
 	"utils.h"
 
-1652278219 c:\users\alice\documents\github\estacionamento\fileira.h
+1652305377 c:\users\alice\documents\github\estacionamento\fileira.h
 	"carro.h"
+	"utils.h"
 
-1652278219 c:\users\alice\documents\github\estacionamento\rua.h
+1652303773 c:\users\alice\documents\github\estacionamento\rua.h
 	"carro.h"
 
 1652301411 source:c:\users\alice\documents\github\estacionamento\rua.c
@@ -138,15 +140,15 @@
 1652213299 source:d:\projetos\c\estacionamento\estacionamento\utils.c
 	"utils.h"
 
-1652300895 source:c:\users\alice\documents\github\estacionamento\fileira.c
+1652310100 source:c:\users\alice\documents\github\estacionamento\fileira.c
 	"fileira.h"
 
 1652300427 source:c:\users\alice\documents\github\estacionamento\utils.c
 	"utils.h"
 
-1652300710 source:c:\users\alice\documents\github\estacionamento\menu.c
+1652303552 source:c:\users\alice\documents\github\estacionamento\menu.c
 	"menu.h"
 
-1652301433 source:c:\users\alice\documents\github\estacionamento\estacionamento.c
+1652310864 source:c:\users\alice\documents\github\estacionamento\estacionamento.c
 	"estacionamento.h"
 

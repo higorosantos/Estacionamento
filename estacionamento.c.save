@@ -11,8 +11,6 @@ Estacionamento* criar_estacionamento(int qtdFileiras, int maxFileiras, int maxRu
     }
 
     estaci->fileiras = (Pilha**)malloc(qtdFileiras * sizeof(Pilha*));
-    estaci->totalVagas = (int*)malloc(sizeof(int));
-
 
     if(estaci == NULL){
 
@@ -54,6 +52,11 @@ Estacionamento* criar_estacionamento(int qtdFileiras, int maxFileiras, int maxRu
     } else {
         estaci->totalVagas = qtdFileiras * maxFileiras - (maxFileiras - maxRua) + 1;
     }
+
+    imprime_goiaba(estaci);
+    getchar();
+    aperte_enter();
+
 
     return estaci;
 }
@@ -152,6 +155,7 @@ int remover_carro(Estacionamento *estaci, char *placa){
 
 
     carro = pilha_pop(estaci->fileiras[fileira]);
+    estaci->totalVagas++;
 
 
 
@@ -175,12 +179,8 @@ int remover_carro(Estacionamento *estaci, char *placa){
 
         //int teste = pilha_push(estaci->fileiras[fileira],carro);
         carro = remove_rua(estaci->rua);
-
-
     }
-
     return 1;
-
 }
 
 void imprime_estaci(Estacionamento *estaci){
@@ -204,7 +204,26 @@ void imprime_rua(Estacionamento *estaci){
     mudar_cor(1);
     printf("\n\t--- RUA ---\n");
     mudar_cor(3);
+    imprime_espaco(estaci->rua);
     imprime_placa_rua(estaci->rua);
     imprime_tempo_rua(estaci->rua);
     printf("\n\n");
 }
+
+int adiciona_goiaba(Estacionamento *estaci){
+    Carro *carro = criar_carro("-1", -1);
+    int fileira = procurar_vaga(estaci, carro);
+    inserir_carro(estaci, carro, fileira);
+    return fileira;
+}
+
+void imprime_goiaba(Estacionamento *estaci){
+    Carro *aux = NULL;
+    int fileira;
+    fileira = adiciona_goiaba(estaci);
+    imprime_estaci(estaci);
+    aux = pilha_pop(estaci->fileiras[fileira]);
+    free(aux);
+    estaci->totalVagas++;
+}
+
