@@ -53,6 +53,8 @@ int pilha_push(Pilha *pilha, Carro *carro){
 
     pilha->arr[pilha->n] = carro;
 
+    printf("FOI ADCIONADO A O INDICE %d", pilha->n);
+
     pilha->n++;
 
     return 1;
@@ -60,6 +62,8 @@ int pilha_push(Pilha *pilha, Carro *carro){
 }
 
 Carro* pilha_pop(Pilha *pilha){
+
+    Carro *aux = NULL;
 
     if(pilha->n == 0){
 
@@ -69,7 +73,12 @@ Carro* pilha_pop(Pilha *pilha){
 
     pilha->n--;
 
-    return pilha->arr[pilha->n];
+    aux = pilha->arr[pilha->n];
+
+    pilha->arr[pilha->n] = NULL;
+
+
+    return aux;
 
 }
 

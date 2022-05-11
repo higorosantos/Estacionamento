@@ -45,6 +45,15 @@ Estacionamento* criar_estacionamento(int qtdFileiras, int maxFileiras, int maxRu
 
     }
 
+    Carro *gol = criar_carro("ABD7458",42);
+
+    inserir_rua(estaci->rua, gol);
+
+    remove_rua(estaci->rua);
+
+    aperte_enter();
+
+
     estaci->qtdFileiras = qtdFileiras;
 
 
@@ -150,6 +159,8 @@ int remover_carro(Estacionamento *estaci, char *placa){
 
     carro = pilha_pop(estaci->fileiras[fileira]);
 
+
+
     while(strcmp(placa, getPlaca(carro)) != 0){
 
         resultado = inserir_rua(estaci->rua, carro);
@@ -158,16 +169,19 @@ int remover_carro(Estacionamento *estaci, char *placa){
 
     }
 
-    imprime_rua(estaci);
+    //imprime_rua(estaci);
 
     free(carro);
 
     carro = remove_rua(estaci->rua);
 
+    printf("PLACA DO CARRO QUE ESTA SENDO POPADO: %s \n",getPlaca(carro));
+
     while(carro != NULL){
 
-        carro = remove_rua(estaci->rua);
         int teste = pilha_push(estaci->fileiras[fileira],carro);
+        carro = remove_rua(estaci->rua);
+
 
     }
 
