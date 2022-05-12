@@ -66,6 +66,22 @@ int rua_vazia(Rua *rua){
     return -1;
 }
 
+int rua_cheia(Rua *rua){
+
+    if(rua->n == rua->tam){
+
+        return 1;
+    }
+
+    return -1;
+}
+
+
+int getTamRua(Rua *rua){
+
+    return rua->tam;
+
+}
 //REMOVE DO INICIO
 Carro* remove_rua(Rua *rua){
 

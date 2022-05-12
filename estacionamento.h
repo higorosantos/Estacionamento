@@ -10,6 +10,7 @@ typedef struct _estacionamento {
     Pilha **fileiras;
     Rua *rua;
     int qtdFileiras;
+    int tamFileiras;
     int totalVagas;
 
 }Estacionamento;
@@ -25,6 +26,8 @@ int inserir_carro(Estacionamento *estaci, Carro *carro, int fileira);
 //RETORNA A FILEIRA RECOMENDADA PARA O ARMAZENAMENTO,SE POR ACASO TODAS
 //AS FILEIRAS ESTIVEREM CHEIAS RETORNA -1
 int procurar_vaga(Estacionamento *estaci, Carro *carro);
+
+int vaga_temporaria(Estacionamento *estaci);
 
 int remover_carro(Estacionamento *estaci, char *placa);
 

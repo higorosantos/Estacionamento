@@ -16,3 +16,7 @@ void imprime_placa_rua(Rua *rua);
 void imprime_tempo_rua(Rua *rua);
 
 void imprime_espaco(Rua *rua);
+
+int rua_cheia(Rua *rua);
+
+int getTamRua(Rua *rua);

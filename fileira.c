@@ -53,8 +53,6 @@ int pilha_push(Pilha *pilha, Carro *carro){
 
     pilha->arr[pilha->n] = carro;
 
-    printf("FOI ADCIONADO A O INDICE %d", pilha->n);
-
     pilha->n++;
 
     return 1;

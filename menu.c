@@ -165,64 +165,74 @@ void interfaceInserirCarro(Estacionamento *estaci){
      printf("\n-------------------------------------------------\n\n");
 
      if(estaci == NULL){
+
         system("cls");
         imprime_erro("\tESTACIONAMENTO NÃO CONFIGURADO, CONFIGURE UM ANTES DE CONTINUAR.");
 
+        return;
+
+     }
+
+     if(estaci->totalVagas == 0){
+
+        imprime_erro("\tESTACIONAMENTO CHEIO.");
+
+        return;
+
+     }
+
+     Carro *carro = NULL;
+
+     int previsaoSaida, fileira, resultado;
+     char *placa = NULL;
+
+     mudar_cor(3);
+
+     placa = capturar_placa();
+
+     printf("\n\tQuanto tempo ele irá permanecer no estacionamento(em horas)? ");
+     scanf("%d", &previsaoSaida);
+
+     carro = criar_carro(placa, abs(previsaoSaida));
+
+     if(carro == NULL){
+
+        system("cls");
+        imprime_erro("\tERRO AO ALOCAR MEMORIA, PORFAVOR FECHE ALGUM PROCESSO E TENTE NOVAMENTE.");
+
      }else{
 
-        Carro *carro = NULL;
+         char resposta;
 
-        int previsaoSaida, fileira, resultado;
-        char *placa = NULL;
+         fileira = procurar_vaga(estaci, carro);
 
+         imprime_goiaba(estaci, fileira);
 
+         do{
+            mudar_cor(3);
+            printf("\n\tDeseja colocar o veiculo nessa posição(S/N)? ");
 
-        mudar_cor(3);
+            resposta = getch();
 
-        placa = capturar_placa();
-
-        printf("\n\tQuanto tempo ele irá permanecer no estacionamento(em horas)? ");
-        scanf("%d", &previsaoSaida);
-
-        carro = criar_carro(placa, abs(previsaoSaida));
-
-        if(carro == NULL){
-
-            system("cls");
-            imprime_erro("\tERRO AO ALOCAR MEMORIA, PORFAVOR FECHE ALGUM PROCESSO E TENTE NOVAMENTE.");
-
-        }else{
-
-            char resposta;
-
-            fileira = procurar_vaga(estaci, carro);
+            resposta = tolower(resposta);
 
 
-            do{
-                mudar_cor(3);
-                printf("\n\tDeseja colocar o veiculo nessa posição(S/N)? ");
+            switch(resposta){
+                case 's':
+                    resultado = inserir_carro(estaci, carro, fileira);
+                    if(resultado == 1){
+                        system("cls");
+                        imprime_sucesso("\n\tVEICULO INSERIDO AO ESTACIONAMENTO COM SUCESSO.\n");
 
-                resposta = getch();
+                    }else{
 
-                resposta = tolower(resposta);
+                        system("cls");
+                        imprime_erro("\tESTACIONAMENTO CHEIO.");
 
-
-                switch(resposta){
-                    case 's':
-                        resultado = inserir_carro(estaci, carro, fileira);
-                        if(resultado == 1){
-
-                            system("cls");
-                            imprime_sucesso("\n\tVEICULO INSERIDO AO ESTACIONAMENTO COM SUCESSO.\n");
-
-                        }else{
-
-                            system("cls");
-                            imprime_erro("\tESTACIONAMENTO CHEIO.");
-                        }
-                        break;
-                    case 'n':
-                        do{
+                    }
+                    break;
+                case 'n':
+                      do{
                           mudar_cor(3);
                           printf("\n\n\tDeseja inserir veiculo em qual fileira? ");
                           scanf("%d", &fileira);
@@ -240,19 +250,14 @@ void interfaceInserirCarro(Estacionamento *estaci){
                           }
 
                         }while(resultado == -1);
-
-                        break;
-                    default:
-                        imprime_erro("\n\tRESPOSTA INVALIDA.\n");
-                        break;
+                    break;
+                default:
+                    imprime_erro("\n\tRESPOSTA INVALIDA.\n");
+                    break;
                 }
 
-                }while(resposta != 's' && resposta != 'n');
-
-
+             }while(resposta != 's' && resposta != 'n');
         }
-
-     }
 
      cor_padrao();
 }
