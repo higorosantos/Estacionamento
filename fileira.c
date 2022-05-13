@@ -139,7 +139,7 @@ void imprime_carro(Pilha *p){
                 printf("               ");
             } else if (getPrevisaoRetirada(p->arr[i]) == -1){
                 mudar_cor(10);
-                printf("   COLOQUE   ");
+                printf("   ESTACIONE   ");
                 mudar_cor(3);
             } else {
                 printf("    Carro %.2d    ",i + 1 );
@@ -155,7 +155,7 @@ void imprime_placa(Pilha *p){
                 printf("  VAGA VAZIA   ");
             } else if (getPrevisaoRetirada(p->arr[i]) == -1){
                 mudar_cor(10);
-                printf("   AQUI A    ");
+                printf("   SEU CARRO   ");
                 mudar_cor(3);
             } else {
                 printf(" placa: %s ",getPlaca(p->arr[i]));
@@ -171,7 +171,7 @@ void imprime_tempo(Pilha *p){
                 printf("               ");
             } else if (getPrevisaoRetirada(p->arr[i]) == -1){
                 mudar_cor(10);
-                printf("   SUA GOIABA   ");
+                printf("   NESSA VAGA  ");
                 mudar_cor(3);
             } else {
                 printf("   tempo: %.2dhs  ",getPrevisaoRetirada(p->arr[i]));

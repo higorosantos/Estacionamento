@@ -9,11 +9,10 @@ int interfaceMenuPrincipal(){
     printf("\n\n               ESTACIONAMENTO");
     printf("\n-------------------------------------------------");
     mudar_cor(11);
-    printf("\n\n\t1. Configurar estacionamento.");
-    printf("\n\t2. Mostrar estacionamento.");
-    printf("\n\t3. Inserir carro.");
-    printf("\n\t4. Remover carro.");
-    printf("\n\t5. Remover passo a passo.");
+    printf("\n\n\t1. Mostrar estacionamento.");
+    printf("\n\t2. Inserir carro.");
+    printf("\n\t3. Remover carro.");
+    printf("\n\t4. Remover passo a passo.");
     printf("\n\t0. Sair.");
     mudar_cor(3);
     printf("\n\n\tEntre com a opção desejada: ");
@@ -40,32 +39,26 @@ int interfaceMenuAdicionar(){
 }
 
 //PARTE LOGICA DOS MENUS
-void menuPrincipal() {
+void menuPrincipal(Estacionamento *estaci) {
 
-    Estacionamento *estaci = NULL;
 
     int opcao_menu = -1;
     while (opcao_menu != 0) {
         opcao_menu = interfaceMenuPrincipal();
         switch(opcao_menu) {
             case 1:
-                estaci = interfaceConfigurarEstacionamento(estaci);
-                break;
-            case 2:
                 system("cls");
                 imprime_total(estaci);
                 break;
-            case 3:
+            case 2:
                 interfaceInserirCarro(estaci);
+                menuAdicionar(estaci);
                 break;
-            case 4:
+            case 3:
                 interfaceRemoverCarro(estaci);
                 break;
-            case 5:
-                if(estaci == NULL){
-                    system("cls");
-                    imprime_erro("ESTACIONAMENTO NÃO CONFIGURADO!");
-                }
+            case 4:
+                interfaceRemoverCarroPausa(estaci);
                 break;
             case 0:
                 printf("\n\n\nSaindo...\n\n");
@@ -86,23 +79,10 @@ void menuAdicionar(Estacionamento *estaci) {
         opcao_menu = interfaceMenuAdicionar();
         switch(opcao_menu) {
             case 1:
-                estaci = interfaceConfigurarEstacionamento(estaci);
+                //ESTACIONAR NO LOCAL RECOMENDADO
                 break;
             case 2:
-                system("cls");
-                imprime_total(estaci);
-                break;
-            case 3:
-                interfaceInserirCarro(estaci);
-                break;
-            case 4:
-                interfaceRemoverCarro(estaci);
-                break;
-            case 5:
-                if(estaci == NULL){
-                    system("cls");
-                    imprime_erro("\tESTACIONAMENTO NÃO CONFIGURADO!");
-                }
+                //ESTACIONA NA FILEIRA Q A DILZA ESCOLHER
                 break;
             case 0:
                 printf("\n\n\nSaindo...\n\n");
@@ -303,6 +283,47 @@ void interfaceRemoverCarro(Estacionamento *estaci){
 
 }
 
+void interfaceRemoverCarroPausa(Estacionamento *estaci){
+
+     system("cls");
+
+     int resultado;
+     char *placa = NULL;
+
+     mudar_cor(1);
+     printf("\n\n              REMOVER CARRO");
+     printf("\n-------------------------------------------------\n\n");
+
+     if(estaci == NULL){
+        system("cls");
+        imprime_erro("\tESTACIONAMENTO NÃO CONFIGURADO, CONFIGURE UM ANTES DE CONTINUAR.");
+
+     }else{
+
+         mudar_cor(3);
+
+         placa = capturar_placa();
+
+         resultado = remover_carro_pausa(estaci, placa);
+
+         if(resultado == -1){
+
+            imprime_erro("\tCARRO NÃO ENCONTRADO.");
+
+         }else{
+
+            char msg[MSG_SIZE];
+
+            sprintf(msg,"\n\tCARRO COM A PLACA %s FOI REMOVIDO COM SUCESSO.\n", placa);
+            imprime_sucesso(msg);
+
+         }
+
+     }
+
+
+}
+
 char* capturar_placa(){
 
      char *placa = (char*)malloc(TAM_PLACA * sizeof(char));
@@ -370,12 +391,27 @@ void imprime_total(Estacionamento * estaci){
 
 void bem_vindo(){
     mudar_cor(1);
-    printf("\n\t _____________________________________________");
-    printf("\n\t|                                             |");
-    printf("\n\t|           BEM VINDO AO GERADOR DE           |");
-    printf("\n\t|             ESTACIONAMENTO 1.0              |");
-    printf("\n\t|_____________________________________________|");
+    printf("\n\t ______________________________________________");
+    printf("\n\t|                                              |");
+    printf("\n\t|            BEM VINDO AO GERADOR DE           |");
+    printf("\n\t|              ESTACIONAMENTO 1.0              |");
+    printf("\n\t|______________________________________________|");
     printf("\n\n");
     aperte_enter();
+    mudar_cor(3);
+    printf("\n\t ______________________________________________");
+    printf("\n\t|                                              |");
+    printf("\n\t|  Para dar início ao programa é necessário    |");
+    printf("\n\t|  que você crie o seu estacionamento.         |");
+    printf("\n\t|  Neste processo será definido a quantidade   |");
+    printf("\n\t|  de fileiras de vagas, quantos carro caberão |");
+    printf("\n\t|  em cada uma e, por fim, a quantidade de     |");
+    printf("\n\t|  vagas na rua, que serão usadas somente para |");
+    printf("\n\t|  manobrar os carros, caso seja necessário    |");
+    printf("\n\t|  no momento de retirar um dos veículos.      |");
+    printf("\n\t|______________________________________________|");
+    printf("\n\n");
+    aperte_enter();
+
 }
 

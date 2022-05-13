@@ -54,6 +54,13 @@ Estacionamento* criar_estacionamento(int qtdFileiras, int maxFileiras, int maxRu
         estaci->totalVagas = qtdFileiras * maxFileiras - (maxFileiras - maxRua) + 1;
     }
 
+    Carro *carro1 = criar_carro("QWE1234", 2);
+    Carro *carro2 = criar_carro("ASD1234", 2);
+    Carro *carro3 = criar_carro("ZXC1234", 2);
+    inserir_carro(estaci, carro1, 0);
+    inserir_carro(estaci, carro2, 0);
+    inserir_carro(estaci, carro3, 0);
+
     return estaci;
 }
 
@@ -147,11 +154,11 @@ int procurar_vaga(Estacionamento *estaci, Carro *carro){
 //VAGA NA RUA / ELE RECEBE COMO PARAMETRO O FILEIRA
 //ORIGINAL DELES PARA NÃO SEREM INSERIDOS TEMPORARIAMENTE LA.
 //VAI RETORNA A PRIMEIRA FILEIRA COM VAGA.
-int vaga_temporaria(Estacionamento *estaci){
+int vaga_temporaria(Estacionamento *estaci, int fileira){
 
     for(int i = 0; i < estaci->qtdFileiras; i++){
 
-        if(pilha_cheia(estaci->fileiras[i]) == 0){
+        if(pilha_cheia(estaci->fileiras[i]) == 0 && i != fileira){
 
             return i;
 
@@ -165,91 +172,135 @@ int vaga_temporaria(Estacionamento *estaci){
 
 //retorna o indice da fileira aonde esta o carro
 int buscar_fileira_carro(Estacionamento *estaci, char *placa){
+    int fileira;
 
-      for(int i = 0; i < estaci->qtdFileiras; i++){
-
+    for(int i = 0; i < estaci->qtdFileiras; i++){
         if(busca_carro(estaci->fileiras[i],placa) == 1){
-
-           return i;
-
+           fileira = i;
         }
-
     }
-
-    return - 1;
+    return fileira;
 
 }
 
+
 int remover_carro(Estacionamento *estaci, char *placa){
-
     int *arrRemovidos;
-    int tempVaga;
-
-    int cont = 0;
-
-
-
     int fileira = buscar_fileira_carro(estaci, placa);
 
     if(fileira != -1){
-
-        Carro *carro = pilha_pop(estaci->fileiras[fileira]);
-
-        if(getTamRua(estaci->rua) <= estaci->tamFileiras - 1){
-
+        if(getTamRua(estaci->rua) < estaci->tamFileiras - 1){
             arrRemovidos = (int*)malloc((estaci->tamFileiras - getTamRua(estaci->rua)) * sizeof(int));
             printf("%d", (estaci->tamFileiras - getTamRua(estaci->rua)));
-
         }
-
-        //RETIRAR OS CARRO DA FILEIRA PASSANDO
-        //PARA RUA ATE ACHAR O CARRO QUE DESEJA TIRAR
-        //SE A RUA NAO TIVER MAIS VAGA ELE PROCURA VAGAS EM
-        //OUTRAS FILEIRA QUE NÃO SEJA A MESMA QUE ESTA O CARRO QUE VAI
-        //SER RETIRADO
-        while(strcmp(placa, getPlaca(carro)) != 0){
-
-            if(rua_cheia(estaci->rua) == -1){
-
-                inserir_rua(estaci->rua, carro);
-
-            }else{
-
-                tempVaga = vaga_temporaria(estaci);
-                inserir_carro(estaci, carro, tempVaga);
-
-                arrRemovidos[cont] = tempVaga;
-                cont++;
-
-            }
-
-        }
-
-
-        //LIBERA A MEMORIA DO CARRO QUE VAI SER RETIRADO
-        free(carro);
-
-        for(int i = 0; i < cont; i++){
-
-            int v = arrRemovidos[i];
-            carro = pilha_pop(estaci->fileiras[v]);
-            pilha_push(estaci->fileiras[fileira], carro);
-        }
-
-        carro = remove_rua(estaci->rua);
-        //PASSAR OS CARRO DA RUA DE VOLTA PARA FILEIRA
-        while(carro != NULL){
-
-            pilha_push(estaci->fileiras[fileira], carro);
-            carro = remove_rua(estaci->rua);
-        }
-
-
+        bagunca(estaci, placa, fileira, arrRemovidos);
+        arruma(estaci, fileira, arrRemovidos);
     }
-
-    free(arrRemovidos);
-
     return fileira;
+}
+
+int remover_carro_pausa(Estacionamento *estaci, char *placa){
+    int *arrRemovidos;
+    int fileira = buscar_fileira_carro(estaci, placa);
+
+    if(fileira != -1){
+        if(getTamRua(estaci->rua) < estaci->tamFileiras - 1){
+            arrRemovidos = (int*)malloc((estaci->tamFileiras - getTamRua(estaci->rua)) * sizeof(int));
+            printf("%d", (estaci->tamFileiras - getTamRua(estaci->rua)));
+        }
+        bagunca_pausa(estaci, placa, fileira, arrRemovidos);
+        arruma_pausa(estaci, fileira, arrRemovidos);
+    }
+    return fileira;
+}
+
+
+
+void bagunca(Estacionamento *estaci, char *placa, int fileira, int *arrRemovidos){
+    int tempVaga;
+    int cont = 0;
+    Carro *carro = pilha_pop(estaci->fileiras[fileira]);
+
+    while(strcmp(placa, getPlaca(carro)) != 0){
+        if(rua_cheia(estaci->rua) == -1){
+            inserir_rua(estaci->rua, carro);
+        }else{
+
+            tempVaga = vaga_temporaria(estaci, fileira);
+            inserir_carro(estaci, carro, tempVaga);
+            arrRemovidos[cont] = tempVaga;
+            cont++;
+        }
+        carro = pilha_pop(estaci->fileiras[fileira]);
+    }
+    //LIBERA A MEMORIA DO CARRO QUE VAI SER RETIRADO
+    free(carro);
+}
+
+void bagunca_pausa(Estacionamento *estaci, char *placa, int fileira, int *arrRemovidos){
+    int tempVaga;
+    int cont = 0;
+    Carro *carro = pilha_pop(estaci->fileiras[fileira]);
+
+    while(strcmp(placa, getPlaca(carro)) != 0){
+        if(rua_cheia(estaci->rua) == -1){
+            inserir_rua(estaci->rua, carro);
+            imprime_total(estaci);
+            aperte_enter();
+        }else{
+            tempVaga = vaga_temporaria(estaci, fileira);
+            inserir_carro(estaci, carro, tempVaga);
+            imprime_total(estaci);
+            arrRemovidos[cont] = tempVaga;
+            cont++;
+            aperte_enter();
+        }
+        carro = pilha_pop(estaci->fileiras[fileira]);
+    }
+    imprime_total(estaci);
+    aperte_enter();
+    //LIBERA A MEMORIA DO CARRO QUE VAI SER RETIRADO
+    free(carro);
+}
+
+void arruma (Estacionamento *estaci, int fileira, int *arrRemovidos){
+    Carro *carro;
+
+    for(int i = 0; i < sizeof(arrRemovidos)/4; i++){
+        int v = arrRemovidos[i];
+        carro = pilha_pop(estaci->fileiras[v]);
+        pilha_push(estaci->fileiras[fileira], carro);
+    }
+    //PASSAR OS CARRO DA RUA DE VOLTA PARA FILEIRA
+    carro = remove_rua(estaci->rua);
+    while(carro != NULL){
+        pilha_push(estaci->fileiras[fileira], carro);
+        carro = remove_rua(estaci->rua);
+    }
+    free(carro);
+    free(arrRemovidos);
+}
+
+void arruma_pausa (Estacionamento *estaci, int fileira, int *arrRemovidos){
+    Carro *carro;
+
+    for(int i = 0; i < sizeof(arrRemovidos)/4; i++){
+        int v = arrRemovidos[i];
+        carro = pilha_pop(estaci->fileiras[v]);
+        pilha_push(estaci->fileiras[fileira], carro);
+        imprime_total(estaci);
+        aperte_enter();
+    }
+    //PASSAR OS CARRO DA RUA DE VOLTA PARA FILEIRA
+    carro = remove_rua(estaci->rua);
+    while(carro != NULL){
+        pilha_push(estaci->fileiras[fileira], carro);
+        carro = remove_rua(estaci->rua);
+        imprime_total(estaci);
+        aperte_enter();
+    }
+    free(carro);
+    free(arrRemovidos);
 }
 
 void imprime_estaci(Estacionamento *estaci){

@@ -5,6 +5,9 @@
 int main()
 {
     setlocale(LC_ALL,"portuguese");
+
     bem_vindo();
-    menuPrincipal();
+    Estacionamento *estaci;
+    estaci = interfaceConfigurarEstacionamento(estaci);
+    menuPrincipal(estaci);
 }

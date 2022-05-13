@@ -27,7 +27,7 @@ int inserir_carro(Estacionamento *estaci, Carro *carro, int fileira);
 //AS FILEIRAS ESTIVEREM CHEIAS RETORNA -1
 int procurar_vaga(Estacionamento *estaci, Carro *carro);
 
-int vaga_temporaria(Estacionamento *estaci);
+int vaga_temporaria(Estacionamento *estaci, int fileira);
 
 int remover_carro(Estacionamento *estaci, char *placa);
 
