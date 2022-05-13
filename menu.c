@@ -53,14 +53,13 @@ Estacionamento* interfaceConfigurarEstacionamento(Estacionamento *estaci){
     int maxRua,qtdFileiras,maxFileiras;
 
     mudar_cor(3);
-    printf("\n\tQual quantide de fileira que o estacionamento deve ter? ");
-    scanf("%d", &qtdFileiras);
 
-    printf("\n\tQual quantide máxima de carro por fileiras? ");
-    scanf("%d", &maxFileiras);
+    qtdFileiras = validador_numerico("Qual quantidade de fileiras que o estacionamento deve ter? ");
 
-    printf("\n\tQual quantidade máxima de carros na rua? ");
-    scanf("%d", &maxRua);
+    maxFileiras = validador_numerico("Qual quantidade máxima de carros por fileira? ");
+
+    maxRua = validador_numerico("Qual quantidade máxima de carros na rua? ");
+
     cor_padrao();
 
     estaci = criar_estacionamento(abs(qtdFileiras), abs(maxFileiras), abs(maxRua));
@@ -124,7 +123,7 @@ void menuAdicionar(Estacionamento *estaci, Carro *carro, int fileira) {
                 resultado = inserir_carro(estaci, carro, fileira);
                 if(resultado == 1){
                     system("cls");
-                    imprime_sucesso("\n\tVEICULO INSERIDO AO ESTACIONAMENTO COM SUCESSO.\n");
+                    imprime_sucesso("\n\tVEÍCULO INSERIDO AO ESTACIONAMENTO COM SUCESSO.\n");
 
                 }else{
                     system("cls");
@@ -153,8 +152,8 @@ void interfaceInserirManualmente(Estacionamento *estaci, Carro *carro){
      do{
 
         mudar_cor(3);
-        printf("\n\n\tDeseja inserir veiculo em qual fileira? ");
-        scanf("%d", &fileira);
+
+        fileira = validador_numerico("Deseja inserir veículo em qual fileira? ");
 
         resultado = inserir_carro(estaci, carro, (fileira - 1));
 
@@ -166,7 +165,7 @@ void interfaceInserirManualmente(Estacionamento *estaci, Carro *carro){
 
         }else{
 
-            imprime_erro("\n\tFILEIRA INVALIDA OU CHEIA.");
+            imprime_erro("\n\tFILEIRA INVÁLIDA OU CHEIA.");
         }
 
     }while(resultado == -1);
@@ -215,7 +214,7 @@ void interfaceInserirCarro(Estacionamento *estaci){
      if(carro == NULL){
 
         system("cls");
-        imprime_erro("\tERRO AO ALOCAR MEMORIA, PORFAVOR FECHE ALGUM PROCESSO E TENTE NOVAMENTE.");
+        imprime_erro("\tERRO AO ALOCAR MEMÓRIA, PORFAVOR FECHE ALGUM PROCESSO E TENTE NOVAMENTE.");
 
      }else{
 
@@ -262,6 +261,7 @@ void interfaceRemoverCarro(Estacionamento *estaci){
 
             char msg[MSG_SIZE];
 
+            system("cls");
             sprintf(msg,"\n\tCARRO COM A PLACA %s FOI REMOVIDO COM SUCESSO.\n", placa);
             imprime_sucesso(msg);
 
@@ -323,7 +323,7 @@ int capturar_tempoRetirada(){
 
     do{
         mudar_cor(3);
-        printf("\n\tQuanto tempo ele irá permanecer no estacionamento(em horas)? ");
+        printf("\n\tQuanto tempo permanecerá no estacionamento(em horas)? ");
 
         fflush(stdin);
 
@@ -333,7 +333,7 @@ int capturar_tempoRetirada(){
 
         if(tempRetirada <= 0 || tempRetirada > TEMP_MAX_RETIRADA){
 
-            sprintf(msg, "\tTEMPO DE RETIRADA INVALIDO, TEMPO MINIMO: 1hr / TEMPO MAXIMO: %dhrs.", TEMP_MAX_RETIRADA);
+            sprintf(msg, "\tTEMPO DE RETIRADA INVÁLIDO, TEMPO MÍNIMO: 1hr / TEMPO MÁXIMO: %dhrs.", TEMP_MAX_RETIRADA);
             imprime_erro(msg);
 
         }
@@ -397,6 +397,35 @@ int validarPlaca(char* placa){
 
     return 1;
 
+}
+
+//RECEBE STRING COM TEXTO E VALIDA SE O RESULTADO É NUMERICO
+int validador_numerico(char *str){
+
+
+      char entrada[10];
+      int numero;
+
+      do{
+
+        mudar_cor(3);
+        printf("\n\t%s ",str);
+
+        fflush(stdin);
+
+        fgets(entrada, sizeof entrada, stdin);
+
+        numero = atoi(entrada);
+
+        if(numero == 0){
+
+            imprime_erro("ENTRADA INVÁLIDA.\n");
+
+        }
+
+     }while(numero <= 0);
+
+     return numero;
 }
 
 void bem_vindo(){

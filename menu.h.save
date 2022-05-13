@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <conio.h>
 #include "utils.h"
 #include "estacionamento.h"
-#include <conio.h>
+
 
 int interfaceMenuPrincipal();
 
@@ -19,4 +20,16 @@ char* capturar_placa();
 
 int validarPlaca(char *placa);
 
-void imprime_total(Estacionamento * estaci);
+void imprime_total(Estacionamento *estaci);
+
+void interfaceRemoverCarroPausa(Estacionamento *estaci);
+
+void menuAdicionar(Estacionamento *estaci, Carro *carro, int fileira);
+
+int capturar_tempoRetirada();
+
+void interfaceInserirManualmente(Estacionamento *estaci, Carro *carro);
+
+void bem_vindo();
+
+int validador_numerico(char *str);

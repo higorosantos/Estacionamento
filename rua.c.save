@@ -40,8 +40,6 @@ Rua* criar_rua(int tam){
 int inserir_rua(Rua* rua, Carro *carro)
 {
 
-     printf("PLACA DO CARRO NA RUA: %s", getPlaca(carro));
-
     if (rua->n == rua->tam) {
 
         return -1;
@@ -66,6 +64,22 @@ int rua_vazia(Rua *rua){
     return -1;
 }
 
+int rua_cheia(Rua *rua){
+
+    if(rua->n == rua->tam){
+
+        return 1;
+    }
+
+    return -1;
+}
+
+
+int getTamRua(Rua *rua){
+
+    return rua->tam;
+
+}
 //REMOVE DO INICIO
 Carro* remove_rua(Rua *rua){
 
@@ -79,14 +93,11 @@ Carro* remove_rua(Rua *rua){
 
     aux = rua->arr[0];
 
-    printf("PLACA DO CARRO SENDO REMOVIDO %s\n", getPlaca(aux));
-
 
     rua->arr[0] = NULL;
 
 
 
-    rua->n--;
 
     for(int i = 0; i < rua->n; i++){
 
@@ -94,11 +105,17 @@ Carro* remove_rua(Rua *rua){
 
     }
 
+    rua->n--;
+
+
     return aux;
 }
 
-void imprime_espaco(){
-    printf("|                  |");
+void imprime_espaco(Rua *rua){
+    for(int i = rua->tam-1; i >= 0; i--){
+        printf(" |                ");
+    }
+    printf(" |\n");
 }
 
 void imprime_placa_rua(Rua *rua){

@@ -49,3 +49,5 @@ void arruma_pausa (Estacionamento *estaci, int fileira, int *arrRemovidos);
 int buscar_fileira_carro(Estacionamento *estaci, char *placa);
 
 void imprime_total(Estacionamento *estaci);
+
+void imprime_goiaba(Estacionamento *estaci, int fileira);

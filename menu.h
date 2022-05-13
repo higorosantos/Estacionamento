@@ -31,3 +31,5 @@ int capturar_tempoRetirada();
 void interfaceInserirManualmente(Estacionamento *estaci, Carro *carro);
 
 void bem_vindo();
+
+int validador_numerico(char *str);

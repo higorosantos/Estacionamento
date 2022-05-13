@@ -119,33 +119,21 @@ int procurar_vaga(Estacionamento *estaci, Carro *carro){
     //O CARRO QUE ESTA SENDO ADCIONADO E OQUE ESTA NO TOPO, SE POR ACASO NÃO HAVER UMA FILEIRA QUE CUMPRE ESSE CRITERIO
     //VAI PROCURAR A FILEIRA COM A MENOR DIFERENÇA DE TEMPO E QUE NÃO ESTEJA CHEIA
     for(int i = 0; i < estaci->qtdFileiras; i++){
-
      if(pilha_cheia(estaci->fileiras[i]) == 0 ){
-
         if(pilha_saida_topo(estaci->fileiras[i]) > getPrevisaoRetirada(carro)){
-
             if((pilha_saida_topo(estaci->fileiras[i]) - getPrevisaoRetirada(carro)) < aux){
-
                 fileira = i;
-
                 aux =  pilha_saida_topo(estaci->fileiras[i]) - getPrevisaoRetirada(carro);
-
             }
-
         }else{
-
              if(((pilha_saida_topo(estaci->fileiras[i]) - getPrevisaoRetirada(carro)) > aux2) && fileira == -1){
-
                 fileira = i;
                 aux2 = pilha_saida_topo(estaci->fileiras[i]) - getPrevisaoRetirada(carro);
-
             }
         }
       }
     }
-
     return fileira;
-
 }
 
 
@@ -155,19 +143,12 @@ int procurar_vaga(Estacionamento *estaci, Carro *carro){
 //ORIGINAL DELES PARA NÃO SEREM INSERIDOS TEMPORARIAMENTE LA.
 //VAI RETORNA A PRIMEIRA FILEIRA COM VAGA.
 int vaga_temporaria(Estacionamento *estaci, int fileira){
-
     for(int i = 0; i < estaci->qtdFileiras; i++){
-
         if(pilha_cheia(estaci->fileiras[i]) == 0 && i != fileira){
-
             return i;
-
         }
-
     }
-
     return -1;
-
 }
 
 //retorna o indice da fileira aonde esta o carro
@@ -180,13 +161,10 @@ int buscar_fileira_carro(Estacionamento *estaci, char *placa){
         }
     }
     return fileira;
-
 }
 
 int getTotalVagas(Estacionamento *estaci){
-
     return estaci->totalVagas;
-
 }
 
 int remover_carro(Estacionamento *estaci, char *placa){
@@ -196,32 +174,25 @@ int remover_carro(Estacionamento *estaci, char *placa){
     Carro *carro = NULL;
 
     if(fileira != -1){
-
         carro = pilha_pop(estaci->fileiras[fileira]);
         //COMPARA SE O TOPO DA FILA JA É O CARRO QUE QUEREMOS REMOVER
         //SE FOR JA LIBERA ELE ANTES DE PASSAR POR TODOS AS VERIFICAÇÕES
         if(strcmp(placa, getPlaca(carro)) == 0){
-
             free(carro);
             estaci->totalVagas++;
             return fileira;
 
         }
-
         //VERIFICA SE A RUA TEM VAGA SUFICIENTE PARA FAZER AS MANOBRAS
         //SE NAO TIVER ELE MALLOCA UM ARRAY DE INTEIROS PARA ARMAZENAR
         //EM QUAL FILEIRA OS CARRO FORAM COLOCADOS.
         if(getTamRua(estaci->rua) < estaci->tamFileiras - 1){
-
             arrRemovidos = (int*)malloc((estaci->tamFileiras - getTamRua(estaci->rua)) * sizeof(int));
-
         }
         bagunca(estaci, placa, fileira, arrRemovidos, carro);
         arruma(estaci, fileira, arrRemovidos);
-
         estaci->totalVagas++;
     }
-
     return fileira;
 }
 
@@ -232,32 +203,23 @@ int remover_carro_pausa(Estacionamento *estaci, char *placa){
     Carro *carro = NULL;
 
     if(fileira != -1){
-
         carro = pilha_pop(estaci->fileiras[fileira]);
         //COMPARA SE O TOPO DA FILA JA É O CARRO QUE QUEREMOS REMOVER
         //SE FOR JA LIBERA ELE ANTES DE PASSAR POR TODOS AS VERIFICAÇÕES
         if(strcmp(placa, getPlaca(carro)) == 0){
-
             free(carro);
             estaci->totalVagas++;
             return fileira;
-
         }
-
         if(getTamRua(estaci->rua) < estaci->tamFileiras - 1){
-
             arrRemovidos = (int*)malloc((estaci->tamFileiras - getTamRua(estaci->rua)) * sizeof(int));
-
         }
         bagunca_pausa(estaci, placa, fileira, arrRemovidos, carro);
         arruma_pausa(estaci, fileira, arrRemovidos);
-
         estaci->totalVagas++;
     }
     return fileira;
 }
-
-
 
 void bagunca(Estacionamento *estaci, char *placa, int fileira, int *arrRemovidos, Carro* carro){
     int tempVaga;
@@ -286,19 +248,28 @@ void bagunca_pausa(Estacionamento *estaci, char *placa, int fileira, int *arrRem
     while(strcmp(placa, getPlaca(carro)) != 0){
         if(rua_cheia(estaci->rua) == -1){
             inserir_rua(estaci->rua, carro);
-            imprime_total(estaci);
+            system("cls");
+            printf("\n\n");
+            imprime_estaci(estaci);
+            imprime_rua(estaci);
             aperte_enter();
         }else{
             tempVaga = vaga_temporaria(estaci, fileira);
             inserir_carro(estaci, carro, tempVaga);
-            imprime_total(estaci);
+            system("cls");
+            printf("\n\n");
+            imprime_estaci(estaci);
+            imprime_rua(estaci);
             arrRemovidos[cont] = tempVaga;
             cont++;
             aperte_enter();
         }
         carro = pilha_pop(estaci->fileiras[fileira]);
     }
-    imprime_total(estaci);
+    system("cls");
+    printf("\n\n");
+    imprime_estaci(estaci);
+    imprime_rua(estaci);
     aperte_enter();
     //LIBERA A MEMORIA DO CARRO QUE VAI SER RETIRADO
     free(carro);
@@ -315,10 +286,7 @@ void arruma (Estacionamento *estaci, int fileira, int *arrRemovidos){
             int v = arrRemovidos[i];
             carro = pilha_pop(estaci->fileiras[v]);
             pilha_push(estaci->fileiras[fileira], carro);
-            imprime_total(estaci);
-            aperte_enter();
         }
-
         free(arrRemovidos);
     }
     //PASSAR OS CARRO DA RUA DE VOLTA PARA FILEIRA
@@ -332,24 +300,28 @@ void arruma (Estacionamento *estaci, int fileira, int *arrRemovidos){
 
 void arruma_pausa (Estacionamento *estaci, int fileira, int *arrRemovidos){
     Carro *carro;
-    int cont = 0;
 
     if((estaci->tamFileiras - getTamRua(estaci->rua)) > 0){
         for(int i = 0; i < sizeof(arrRemovidos)/4; i++){
             int v = arrRemovidos[i];
             carro = pilha_pop(estaci->fileiras[v]);
             pilha_push(estaci->fileiras[fileira], carro);
-            imprime_total(estaci);
+            system("cls");
+            printf("\n\n");
+            imprime_estaci(estaci);
+            imprime_rua(estaci);
             aperte_enter();
         }
-
         free(arrRemovidos);
     }
     //PASSAR OS CARRO DA RUA DE VOLTA PARA FILEIRA
     carro = remove_rua(estaci->rua);
     while(carro != NULL){
         pilha_push(estaci->fileiras[fileira], carro);
-        imprime_total(estaci);
+        system("cls");
+        printf("\n\n");
+        imprime_estaci(estaci);
+        imprime_rua(estaci);
         aperte_enter();
         carro = remove_rua(estaci->rua);
     }

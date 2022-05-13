@@ -40,8 +40,6 @@ Rua* criar_rua(int tam){
 int inserir_rua(Rua* rua, Carro *carro)
 {
 
-     printf("PLACA DO CARRO NA RUA: %s", getPlaca(carro));
-
     if (rua->n == rua->tam) {
 
         return -1;
@@ -98,7 +96,7 @@ Carro* remove_rua(Rua *rua){
 
     rua->arr[0] = NULL;
 
-
+    rua->n--;
 
 
     for(int i = 0; i < rua->n; i++){
@@ -107,7 +105,7 @@ Carro* remove_rua(Rua *rua){
 
     }
 
-    rua->n--;
+    //rua->n--;
 
 
     return aux;
@@ -115,7 +113,7 @@ Carro* remove_rua(Rua *rua){
 
 void imprime_espaco(Rua *rua){
     for(int i = rua->tam-1; i >= 0; i--){
-        printf(" |                ");
+        printf(" |                 ");
     }
     printf(" |\n");
 }
@@ -124,7 +122,7 @@ void imprime_placa_rua(Rua *rua){
     for(int i = rua->tam-1; i >= 0; i--){
         printf(" | ");
             if(getPlaca(rua->arr[i]) == NULL){
-                printf("   VAGA VAZIA  ");
+                printf("   VAGA VAZIA   ");
             } else {
                 printf(" placa: %s ",getPlaca(rua->arr[i]));
             }
@@ -136,7 +134,7 @@ void imprime_tempo_rua(Rua *rua){
     for(int i = rua->tam-1; i >= 0; i--){
         printf(" | ");
             if(getPlaca(rua->arr[i]) == NULL){
-                printf("               ");
+                printf("                ");
             } else {
                 printf("   tempo: %.2dhs  ",getPrevisaoRetirada(rua->arr[i]));
             }
