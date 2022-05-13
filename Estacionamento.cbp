@@ -39,10 +39,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="estacionamento.h" />
-		<Unit filename="fileira.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="fileira.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -50,10 +46,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="menu.h" />
-		<Unit filename="rua.c">
+		<Unit filename="pilha.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="rua.h" />
+		<Unit filename="pilha.h" />
 		<Unit filename="utils.c">
 			<Option compilerVar="CC" />
 		</Unit>
