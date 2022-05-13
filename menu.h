@@ -20,6 +20,14 @@ char* capturar_placa();
 
 int validarPlaca(char *placa);
 
-void imprime_total(Estacionamento * estaci);
+void imprime_total(Estacionamento *estaci);
+
+void interfaceRemoverCarroPausa(Estacionamento *estaci);
+
+void menuAdicionar(Estacionamento *estaci, Carro *carro, int fileira);
+
+int capturar_tempoRetirada();
+
+void interfaceInserirManualmente(Estacionamento *estaci, Carro *carro);
 
 void bem_vindo();

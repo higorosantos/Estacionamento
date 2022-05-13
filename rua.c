@@ -95,20 +95,20 @@ Carro* remove_rua(Rua *rua){
 
     aux = rua->arr[0];
 
-    printf("PLACA DO CARRO SENDO REMOVIDO %s\n", getPlaca(aux));
-
 
     rua->arr[0] = NULL;
 
 
 
-    rua->n--;
 
     for(int i = 0; i < rua->n; i++){
 
         rua->arr[i] = rua->arr[i + 1];
 
     }
+
+    rua->n--;
+
 
     return aux;
 }

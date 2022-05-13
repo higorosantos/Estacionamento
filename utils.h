@@ -16,3 +16,5 @@ void imprime_sucesso(char sucesso[MSG_SIZE]);
 void imprimir_colorido(char[MSG_SIZE], int cor);
 
 void aperte_enter();
+
+void string_maiuscula(char *str);
