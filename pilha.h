@@ -13,8 +13,6 @@ Carro* pilha_pop(Pilha *pilha);
 
 int pilha_vazia(Pilha *pilha);
 
-int pilha_buscar(Pilha *p, char placa[TAM_PLACA]);
-
 int pilha_cheia(Pilha *pilha);
 
 int pilha_tam_max(Pilha *pilha);
@@ -24,8 +22,14 @@ int pilha_saida_topo(Pilha *p);
 //RETORNA A QUANTIDADE DE CARROS NA FILEIRA
 int getQtdCarros(Pilha *pilha);
 
+void imprime_espaco(Pilha *p);
+
 void imprime_carro(Pilha *p);
 
 void imprime_placa(Pilha *p);
 
 void imprime_tempo(Pilha *p);
+
+int pilha_tam_max(Pilha *pilha);
+
+int busca_carro(Pilha *p, char placa[TAM_PLACA]);

@@ -48,3 +48,16 @@ void imprimir_colorido(char msg[MSG_SIZE], int cor){
 
 }
 
+void string_maiuscula(char *str){
+
+        int tam = strlen(str)(sizeof str / sizeof str[0]) - 1;
+
+
+        for(int i = 0; i < tam; i++){
+
+            str[i] = toupper(str[i]);
+
+        }
+
+
+}

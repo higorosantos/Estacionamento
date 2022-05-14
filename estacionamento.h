@@ -1,6 +1,5 @@
 #include "carro.h"
-#include "fileira.h"
-#include "rua.h"
+#include "pilha.h"
 #include "utils.h"
 
 #define TEMP_MAX_RETIRADA 72
@@ -9,7 +8,7 @@
 typedef struct _estacionamento {
 
     Pilha **fileiras;
-    Rua *rua;
+    Pilha *rua;
     int qtdFileiras;
     int tamFileiras;
     int totalVagas;

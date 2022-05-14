@@ -45,19 +45,12 @@ void imprimir_colorido(char msg[MSG_SIZE], int cor){
     mudar_cor(cor);
     printf("%s", msg);
     cor_padrao();
-
 }
 
 void string_maiuscula(char *str){
 
-        int tam = (sizeof str / sizeof str[0]) - 1;
-
-
+        int tam = strlen(str);
         for(int i = 0; i < tam; i++){
-
             str[i] = toupper(str[i]);
-
         }
-
-
 }

@@ -25,9 +25,7 @@ int interfaceMenuAdicionar(){
 
 
     int opcao;
-    mudar_cor(1);
-    printf("\n\n               ESTACIONAMENTO");
-    printf("\n-------------------------------------------------");
+
     mudar_cor(11);
     printf("\n\n\t1. Estacionar carro no local recomendado.");
     printf("\n\t2. Escolher uma fileira para estacionar o carro.");
@@ -182,20 +180,17 @@ void interfaceInserirCarro(Estacionamento *estaci){
      printf("\n-------------------------------------------------\n\n");
 
      if(estaci == NULL){
-
         system("cls");
         imprime_erro("\tESTACIONAMENTO NÃO CONFIGURADO, CONFIGURE UM ANTES DE CONTINUAR.");
 
         return;
-
      }
 
      if(getTotalVagas(estaci) == 0){
-
+        system("cls");
         imprime_erro("\tESTACIONAMENTO CHEIO.");
 
         return;
-
      }
 
      Carro *carro = NULL;
@@ -206,6 +201,12 @@ void interfaceInserirCarro(Estacionamento *estaci){
      mudar_cor(3);
 
      placa = capturar_placa();
+
+     if(buscar_fileira_carro(estaci, placa) != -1){
+        system("cls");
+        imprime_erro("\tCARRO JÁ ESTACIONADO OU PLACA ERRADA.");
+        return;
+     }
 
      previsaoSaida = capturar_tempoRetirada();
 
@@ -339,8 +340,6 @@ int capturar_tempoRetirada(){
         }
 
      }while(tempRetirada <= 0 || tempRetirada > TEMP_MAX_RETIRADA);
-
-     printf("TEMPO RETIRADA %d", tempRetirada);
 
      return tempRetirada;
 }

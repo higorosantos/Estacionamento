@@ -54,13 +54,6 @@ Estacionamento* criar_estacionamento(int qtdFileiras, int maxFileiras, int maxRu
         estaci->totalVagas = qtdFileiras * maxFileiras - (maxFileiras - maxRua) + 1;
     }
 
-    Carro *carro1 = criar_carro("QWE1234", 2);
-    Carro *carro2 = criar_carro("ASD1234", 2);
-    Carro *carro3 = criar_carro("ZXC1234", 2);
-    inserir_carro(estaci, carro1, 0);
-    inserir_carro(estaci, carro2, 0);
-    inserir_carro(estaci, carro3, 0);
-
     return estaci;
 }
 
@@ -102,16 +95,11 @@ int procurar_vaga(Estacionamento *estaci, Carro *carro){
     //VERIFICA SE TEM ALGUMA FILEIRA VAZIA/ FIZ UM FOR SEPARADO
     //PARA CASO OS PRIMEIROS NÃO FOREM VAZIO, NAO PASSAR POR TODOS AQUELES IF ALI DE BAIXO.
     for(int i = 0; i < estaci->qtdFileiras; i++){
-
          if(pilha_vazia(estaci->fileiras[i])){
 
             return i;
-
         }
-
     }
-
-
     //PERCORRE PELAS FILEIRAS VERIFICANDO O TOPO DELAS COMPARANDO COM A
     //PREVISÃO DE RETIRADA DO VEICULO QUE ESTA NO TOPO COM O QUE ESTA SENDO INSERIDO
     //VAI SEMPRE TENTAR ACHAR UMA FILEIRA QUE TEM UM CARRO COM O MAIOR PREVISÃO DE
@@ -181,7 +169,6 @@ int remover_carro(Estacionamento *estaci, char *placa){
             free(carro);
             estaci->totalVagas++;
             return fileira;
-
         }
         //VERIFICA SE A RUA TEM VAGA SUFICIENTE PARA FAZER AS MANOBRAS
         //SE NAO TIVER ELE MALLOCA UM ARRAY DE INTEIROS PARA ARMAZENAR
@@ -192,6 +179,7 @@ int remover_carro(Estacionamento *estaci, char *placa){
         bagunca(estaci, placa, fileira, arrRemovidos, carro);
         arruma(estaci, fileira, arrRemovidos);
         estaci->totalVagas++;
+
     }
     return fileira;
 }
@@ -232,6 +220,7 @@ void bagunca(Estacionamento *estaci, char *placa, int fileira, int *arrRemovidos
 
             tempVaga = vaga_temporaria(estaci, fileira);
             inserir_carro(estaci, carro, tempVaga);
+            estaci->totalVagas++;
             arrRemovidos[cont] = tempVaga;
             cont++;
         }
@@ -256,6 +245,7 @@ void bagunca_pausa(Estacionamento *estaci, char *placa, int fileira, int *arrRem
         }else{
             tempVaga = vaga_temporaria(estaci, fileira);
             inserir_carro(estaci, carro, tempVaga);
+            estaci->totalVagas++;
             system("cls");
             printf("\n\n");
             imprime_estaci(estaci);
@@ -350,8 +340,8 @@ void imprime_rua(Estacionamento *estaci){
     printf("\n\t--- RUA ---\n");
     mudar_cor(3);
     imprime_espaco(estaci->rua);
-    imprime_placa_rua(estaci->rua);
-    imprime_tempo_rua(estaci->rua);
+    imprime_placa(estaci->rua);
+    imprime_tempo(estaci->rua);
     printf("\n\n");
 }
 
